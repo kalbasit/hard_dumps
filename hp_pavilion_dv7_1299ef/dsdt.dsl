@@ -5282,14 +5282,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     })
                     Method (_CRS, 0, Serialized)
                     {
-                        If (LEqual (HPTS, One))
-                        {
-                            Return (BUF0)
-                        }
-                        Else
-                        {
-                            Return (BUF1)
-                        }
+                        Return (BUF0)
                     }
                 }
 
@@ -5309,51 +5302,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     })
                     Method (_STA, 0, NotSerialized)
                     {
-                        If (LGreaterEqual (OSYS, 0x07D1))
-                        {
-                            If (LEqual (HPTS, One))
-                            {
-                                Return (0x0F)
-                            }
-                            Else
-                            {
-                                Return (Zero)
-                            }
-                        }
-                        Else
-                        {
-                            If (HPTS)
-                            {
-                                Return (0x0B)
-                            }
-                            Else
-                            {
-                                Return (Zero)
-                            }
-                        }
+                        Return (0x0F)
                     }
 
                     Method (_CRS, 0, Serialized)
                     {
-                        If (LEqual (HPTS, One))
-                        {
-                            CreateDWordField (BUF0, \_SB.PCI0.LPC.HPET._Y0E._BAS, HPT0)
-                            If (LEqual (HPTA, One))
-                            {
-                                Store (0xFED01000, HPT0)
-                            }
-
-                            If (LEqual (HPTA, 0x02))
-                            {
-                                Store (0xFED02000, HPT0)
-                            }
-
-                            If (LEqual (HPTA, 0x03))
-                            {
-                                Store (0xFED03000, HPT0)
-                            }
-                        }
-
                         Return (BUF0)
                     }
                 }

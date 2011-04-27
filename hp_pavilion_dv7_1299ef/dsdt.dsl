@@ -2,7 +2,7 @@
  * Intel ACPI Component Architecture
  * AML Disassembler version 20090521
  *
- * Disassembly of dsdt.aml, Wed Apr 27 00:06:11 2011
+ * Disassembly of dsdt.aml, Tue Apr 26 23:44:20 2011
  *
  *
  * Original Table Header:
@@ -1177,6 +1177,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Return (Multiply (\_SB.PCI0.LPC.EC0.FNSP, 0x64))
                 }
+
+                Return (Package (0x02)
+                {
+                    Zero,
+                    Zero
+                })
             }
 
             Method (FSSP, 1, NotSerialized)
@@ -1230,6 +1236,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x0EA8)
                     }
                 }
+
+                Return (Package (0x02)
+                {
+                    Zero,
+                    Zero
+                })
             }
 
             Method (_CRT, 0, Serialized)
@@ -4235,6 +4247,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     CreateField (Arg2, 0x40, Local2, ARGS)
                                     Return (^^PCI0.PVGA.EVGA.NVIF (FUNC, SUBF, ARGS))
                                 }
+
+                                Return (Package (0x02)
+                                {
+                                    Zero,
+                                    Zero
+                                })
                             }
                         }
                     }

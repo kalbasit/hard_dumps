@@ -6268,38 +6268,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (EHC1)
             {
                 Name (_ADR, 0x001D0007)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x0C)
-                        {
-                            "AAPL,current-available", 
-                            0x05DC, 
-                            "AAPL,current-extra", 
-                            0x044C, 
-                            "AAPL,current-in-sleep", 
-                            0x09C4, 
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x3A, 0x3A, 0x00, 0x00
-                            }, 
-
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                0x01
-                            }, 
-
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
-
                 Name (_PRW, Package (0x02)
                 {
                     0x0D, 

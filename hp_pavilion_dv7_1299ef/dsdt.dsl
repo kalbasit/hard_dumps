@@ -1,23 +1,57 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20080926
- *
- * Disassembly of dsdt.aml, Thu Apr 28 19:32:14 2011
- *
+ * AML Disassembler version 20110211-32 [Feb 12 2011]
+ * Copyright (c) 2000 - 2011 Intel Corporation
+ * 
+ * Disassembly of dsdt.aml, Thu Apr 28 22:37:33 2011
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A53A (42298)
- *     Revision         0x01 **** ACPI 1.0, no 64-bit math support
- *     Checksum         0xA7
+ *     Length           0x0000A822 (43042)
+ *     Revision         0x01 **** 32-bit table (V1), no 64-bit math support
+ *     Checksum         0xBA
  *     OEM ID           "HP    "
  *     OEM Table ID     "VADER   "
  *     OEM Revision     0x00000001 (1)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20080926 (537397542)
+ *     Compiler Version 0x20110211 (537985553)
  */
+
 DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 {
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, Buffer (0x10)
+                {
+                    /* 0000 */    0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44, 
+                    /* 0008 */    0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
+                }))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (One)
+                        {
+                            0x03
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (One)
+            {
+                0x00
+            }, Arg4)
+        Return (Zero)
+    }
+
     Name (SP2O, 0x4E)
     Name (SP1O, 0x164E)
     Name (IO1B, 0x0600)
@@ -1237,11 +1271,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
 
-                Return (Package (0x02)
-                {
-                    Zero, 
-                    Zero
-                })
+                Return (Zero)
             }
 
             Method (_CRT, 0, Serialized)
@@ -1466,7 +1496,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
         Device (AC)
         {
-            Name (_HID, "ACPI0003")
+            Name (_HID, "ACPI000")
             Name (_PCL, Package (0x01)
             {
                 _SB
@@ -1725,17 +1755,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     ,, _Y0C, AddressRangeMemory, TypeStatic)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
-                    0x00000000,         // Range Minimum
+                    0xFEBFFFFE,         // Range Minimum
                     0xFEBFFFFF,         // Range Maximum
                     0x00000000,         // Translation Offset
-                    0x00000000,         // Length
+                    0x00000002,         // Length
                     ,, _Y0D, AddressRangeMemory, TypeStatic)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
                     0xFED40000,         // Range Minimum
                     0xFED44FFF,         // Range Maximum
                     0x00000000,         // Translation Offset
-                    0x00000000,         // Length
+                    0x00005000,         // Length
                     ,, , AddressRangeMemory, TypeStatic)
             })
             Method (_CRS, 0, Serialized)
@@ -4518,6 +4548,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (LPC)
             {
                 Name (_ADR, 0x001F0000)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x18, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 OperationRegion (PRR0, PCI_Config, 0x60, 0x04)
                 Field (PRR0, AnyAcc, NoLock, Preserve)
                 {
@@ -5266,7 +5310,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x08,               // Length
+                            0x02,               // Length
                             )
                     })
                     Name (BUF1, ResourceTemplate ()
@@ -5416,8 +5460,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x01,               // Alignment
                             0x02,               // Length
                             )
-                        IRQNoFlags ()
-                            {2}
                     })
                 }
 
@@ -5469,8 +5511,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x10,               // Alignment
                             0x04,               // Length
                             )
-                        IRQNoFlags ()
-                            {0}
                     })
                     Method (_CRS, 0, Serialized)
                     {
@@ -6045,6 +6085,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC1)
             {
                 Name (_ADR, 0x001D0000)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x34, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x03, 
@@ -6075,6 +6129,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC2)
             {
                 Name (_ADR, 0x001D0001)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x35, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x04, 
@@ -6105,6 +6173,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC3)
             {
                 Name (_ADR, 0x001D0002)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x36, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x0C, 
@@ -6135,6 +6217,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC6)
             {
                 Name (_ADR, 0x001D0003)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x37, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x20, 
@@ -6165,6 +6261,38 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (EHC1)
             {
                 Name (_ADR, 0x001D0007)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x0C)
+                        {
+                            "AAPL,current-available", 
+                            0x05DC, 
+                            "AAPL,current-extra", 
+                            0x044C, 
+                            "AAPL,current-in-sleep", 
+                            0x09C4, 
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x3A, 0x3A, 0x00, 0x00
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                0x01
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x0D, 
@@ -6203,9 +6331,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             Zero
                         })
-                        Name (_PLD, Buffer (0x10)
+                        Name (_PLD, Package (0x04)
                         {
-                            0x81, 0x00, 0x30, 0x00
+                            0x81, 
+                            Zero, 
+                            0x30, 
+                            Zero
                         })
                     }
                 }
@@ -6214,6 +6345,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC4)
             {
                 Name (_ADR, 0x001A0000)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x41, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x0E, 
@@ -6252,9 +6397,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             Zero
                         })
-                        Name (_PLD, Buffer (0x10)
+                        Name (_PLD, Package (0x04)
                         {
-                            0x81, 0x00, 0x30, 0x00
+                            0x81, 
+                            Zero, 
+                            0x30, 
+                            Zero
                         })
                     }
 
@@ -6268,9 +6416,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             Zero
                         })
-                        Name (_PLD, Buffer (0x10)
+                        Name (_PLD, Package (0x04)
                         {
-                            0x81, 0x00, 0x30, 0x00
+                            0x81, 
+                            Zero, 
+                            0x30, 
+                            Zero
                         })
                     }
                 }
@@ -6279,6 +6430,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (UHC5)
             {
                 Name (_ADR, 0x001A0001)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x42, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x05, 
@@ -6309,6 +6474,38 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (EHC2)
             {
                 Name (_ADR, 0x001A0007)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x0C)
+                        {
+                            "AAPL,current-available", 
+                            0x05DC, 
+                            "AAPL,current-extra", 
+                            0x044C, 
+                            "AAPL,current-in-sleep", 
+                            0x09C4, 
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x3A, 0x3A, 0x00, 0x00
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                0x01
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x0D, 
@@ -7277,6 +7474,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (SBUS)
             {
                 Name (_ADR, 0x001F0003)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x04)
+                        {
+                            "name", 
+                            "pci8086,3a30", 
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x30, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+
                 OperationRegion (SMBP, PCI_Config, 0x40, 0xC0)
                 Field (SMBP, DWordAcc, NoLock, Preserve)
                 {
@@ -7880,7 +8093,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Return (Local1)
             }
 
-            Name (_HID, "pnp0c14")
+            Name (_HID, "PNP0c14")
             Name (_UID, Zero)
             Name (WEID, Zero)
             Name (WEDA, Zero)

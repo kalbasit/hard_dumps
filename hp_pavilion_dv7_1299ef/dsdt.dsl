@@ -1,20 +1,20 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20090521
+ * AML Disassembler version 20080926
  *
- * Disassembly of dsdt.aml, Tue Apr 26 23:44:20 2011
+ * Disassembly of dsdt.aml, Thu Apr 28 19:32:14 2011
  *
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A5B2 (42418)
+ *     Length           0x0000A53A (42298)
  *     Revision         0x01 **** ACPI 1.0, no 64-bit math support
- *     Checksum         0xBF
+ *     Checksum         0xA7
  *     OEM ID           "HP    "
  *     OEM Table ID     "VADER   "
  *     OEM Revision     0x00000001 (1)
- *     Compiler ID      "MSFT"
- *     Compiler Version 0x01000013 (16777235)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20080926 (537397542)
  */
 DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 {
@@ -135,7 +135,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         RP6D,   1
     }
 
-    OperationRegion (MBOX, SystemMemory, 0xBDFBEC18, 0x000002BC)
+    OperationRegion (MBOX, SystemMemory, 0xBDFBEC18, 0x02BC)
     Field (MBOX, AnyAcc, NoLock, Preserve)
     {
         PCI1,   8, 
@@ -576,7 +576,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         TRPH,   8
     }
 
-    OperationRegion (NVST, SystemMemory, 0xBDFBEED4, 0x000000CD)
+    OperationRegion (NVST, SystemMemory, 0xBDFBEED4, 0xCD)
     Field (NVST, AnyAcc, Lock, Preserve)
     {
         SMIF,   8, 
@@ -697,10 +697,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
     Scope (_PR)
     {
-        Processor (CPU0, 0x01, 0x00000410, 0x06) {}
-        Processor (CPU1, 0x02, 0x00000410, 0x06) {}
-        Processor (CPU2, 0x03, 0x00000410, 0x06) {}
-        Processor (CPU3, 0x04, 0x00000410, 0x06) {}
+        Processor (CPU0, 0x01, 0x00000000, 0x06) {}
+        Processor (CPU1, 0x02, 0x00000000, 0x06) {}
+        Processor (CPU2, 0x03, 0x00000000, 0x06) {}
+        Processor (CPU3, 0x04, 0x00000000, 0x06) {}
     }
 
     OperationRegion (PRT0, SystemIO, 0x80, 0x04)
@@ -1180,7 +1180,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
                 Return (Package (0x02)
                 {
-                    Zero,
+                    Zero, 
                     Zero
                 })
             }
@@ -1239,7 +1239,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
                 Return (Package (0x02)
                 {
-                    Zero,
+                    Zero, 
                     Zero
                 })
             }
@@ -4250,7 +4250,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
                                 Return (Package (0x02)
                                 {
-                                    Zero,
+                                    Zero, 
                                     Zero
                                 })
                             }
@@ -5277,8 +5277,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x01,               // Alignment
                             0x08,               // Length
                             )
-                        IRQNoFlags ()
-                            {8}
                     })
                     Method (_CRS, 0, Serialized)
                     {
@@ -5298,7 +5296,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Memory32Fixed (ReadOnly,
                             0xFED00000,         // Address Base
                             0x00000400,         // Address Length
-                            _Y0E)
+                            )
                     })
                     Method (_STA, 0, NotSerialized)
                     {

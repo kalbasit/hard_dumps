@@ -1365,6 +1365,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 
     Scope (_SB)
     {
+        Device (PNLF)
+        {
+            Name (_HID, EisaId ("APP0002"))
+            Name (_CID, "backlight")
+            Name (_UID, 0x0A)
+            Name (_STA, 0x0B)
+        }
         Device (PWRB)
         {
             Name (_HID, EisaId ("PNP0C0C"))

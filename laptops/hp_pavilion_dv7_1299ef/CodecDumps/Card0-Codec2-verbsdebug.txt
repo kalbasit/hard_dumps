@@ -1,0 +1,62 @@
+ 
+Blacklist:
+411111f0 400000f0 CD at Int ATAPI
+Removed Nodes: 
+Checking 71c Associations
+
+Current Associations
+ 20571c10 = 1 
+ 20771c21 = 2 
+ 20971c22 = 2 
+ 20b71c23 = 2 
+ 20d71c24 = 2 
+
+  Used associations = 1 2 2 2 2
+Unused associations = 3 4 5 6 7 8 9 a b c d e
+
+Correcting duplicate associations
+
+Checking if 1 already exists in: 2 2 2 2 
+   no duplicate found
+Checking if 2 already exists in: 1 2 2 2 
+   duplicate found - Is this the first time we've seen this association?
+   yes - ignoring
+Checking if 2 already exists in: 1 2 2 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 3
+Checking if 2 already exists in: 1 2 3 2 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 4
+Checking if 2 already exists in: 1 2 3 4 
+   duplicate found - Is this the first time we've seen this association?
+   no - replacing association with: 5
+
+New 71c Associations
+ Before      After
+--------------------------------------------------
+20571c10   20571c10  20571d01  20571e56  20571f18
+20771c21   20771c20  20771d01  20771e56  20771f58
+20971c22   20971c30  20971d01  20971e56  20971f58
+20b71c23   20b71c40  20b71d01  20b71e56  20b71f58
+20d71c24   20d71c50  20d71d01  20d71e56  20d71f58
+
+Reset 71d Misc to 0
+New 71d Associations
+ Before                After
+--------------------------------------------------
+20571d01   20571c10  20571d00  20571e56  20571f18
+20771d01   20771c20  20771d00  20771e56  20771f58
+20971d01   20971c30  20971d00  20971e56  20971f58
+20b71d01   20b71c40  20b71d00  20b71e56  20b71f58
+20d71d01   20d71c50  20d71d00  20d71e56  20d71f58
+
+Correct 71f 02 FP to 01
+New 71f Associations
+ Before                                    After
+--------------------------------------------------
+20571d01   20571c10  20571d00  20571e56  20571f10
+20771d01   20771c20  20771d00  20771e56  20771f50
+20971d01   20971c30  20971d00  20971e56  20971f50
+20b71d01   20b71c40  20b71d00  20b71e56  20b71f50
+20d71d01   20d71c50  20d71d00  20d71e56  20d71f50
+ 

@@ -1,0 +1,40 @@
+
+Verbs from Linux Codec Dump File: Card0-Codec0.txt
+
+Codec: IDT 92HD71B7X   Address: 0   DevID: 287143602 (0x111d76b2)
+
+   Jack   Color  Description                  Node     PinDefault             Original Verbs
+--------------------------------------------------------------------------------------------------------
+    1/8   Green  HP Out at Ext Front         10 0x0a   0x0221401f   00a71c1f 00a71d40 00a71e21 00a71f02
+    1/8    Pink  Mic at Ext Front            11 0x0b   0x02a19020   00b71c20 00b71d90 00b71ea1 00b71f02
+    1/8 Unknown  Other at Ext N/A            12 0x0c   0x40f100f0   00c71cf0 00c71d00 00c71ef1 00c71f40
+ Analog Unknown  Speaker at Int N/A          13 0x0d   0x90170010   00d71c10 00d71d00 00d71e17 00d71f90
+    1/8 Unknown  Other at Ext N/A            14 0x0e   0x40f100f2   00e71cf2 00e71d00 00e71ef1 00e71f40
+    1/8 Unknown  Other at Ext N/A            15 0x0f   0x40f100f7   00f71cf7 00f71d00 00f71ef1 00f71f40
+    1/8 Unknown  Other at Ext N/A            20 0x14   0x40f100f3   01471cf3 01471d00 01471ef1 01471f40
+Digital   Black  Mic at Ext Top              24 0x18   0x85a61150   01871c50 01871d11 01871ea6 01871f85
+    1/8 Unknown  Other at Ext N/A            25 0x19   0x40f100f4   01971cf4 01971d00 01971ef1 01971f40
+    RCA   Black  SPDIF Out at Ext Rear       30 0x1e   0x014411a0   01e71ca0 01e71d11 01e71e44 01e71f01
+    1/8 Unknown  Other at Ext N/A            31 0x1f   0x40f100f5   01f71cf5 01f71d00 01f71ef1 01f71f40
+    1/8 Unknown  Other at Ext N/A            32 0x20   0x40f100f6   02071cf6 02071d00 02071ef1 02071f40
+    1/8 Unknown  Other at Ext N/A            39 0x27   0x40f100f8   02771cf8 02771d00 02771ef1 02771f40
+--------------------------------------------------------------------------------------------------------
+
+
+   Jack   Color  Description                  Node     PinDefault             Modified Verbs
+--------------------------------------------------------------------------------------------------------
+    1/8   Green  HP Out at Ext Front         10 0x0a   0x0221401f   00a71c10 00a71d40 00a71e21 00a71f01
+    1/8    Pink  Mic at Ext Front            11 0x0b   0x02a19020   00b71c20 00b71d90 00b71ea1 00b71f01
+    1/8 Unknown  Other at Ext N/A            12 0x0c   0x40f100f0   00c71cf0 00c71d00 00c71ef1 00c71f40
+ Analog Unknown  Speaker at Int N/A          13 0x0d   0x90170010   00d71c30 00d71d00 00d71e17 00d71f90
+    1/8 Unknown  Other at Ext N/A            14 0x0e   0x40f100f2   00e71c40 00e71d00 00e71ef1 00e71f40
+    1/8 Unknown  Other at Ext N/A            15 0x0f   0x40f100f7   00f71c60 00f71d00 00f71ef1 00f71f40
+    1/8 Unknown  Other at Ext N/A            20 0x14   0x40f100f3   01471c70 01471d00 01471ef1 01471f40
+Digital   Black  Mic at Ext Top              24 0x18   0x85a61150   01871c50 01871d10 01871ea6 01871f80
+    1/8 Unknown  Other at Ext N/A            25 0x19   0x40f100f4   01971c80 01971d00 01971ef1 01971f40
+    RCA   Black  SPDIF Out at Ext Rear       30 0x1e   0x014411a0   01e71ca0 01e71d10 01e71e44 01e71f01
+    1/8 Unknown  Other at Ext N/A            31 0x1f   0x40f100f5   01f71c90 01f71d00 01f71ef1 01f71f40
+    1/8 Unknown  Other at Ext N/A            32 0x20   0x40f100f6   02071cb0 02071d00 02071ef1 02071f40
+    1/8 Unknown  Other at Ext N/A            39 0x27   0x40f100f8   02771cc0 02771d00 02771ef1 02771f40
+--------------------------------------------------------------------------------------------------------
+

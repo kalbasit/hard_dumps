@@ -1,0 +1,24 @@
+
+Verbs from Linux Codec Dump File: Card0-Codec2.txt
+
+Codec: Nvidia MCP77/78 HDMI   Address: 2   DevID: 282984454 (0x10de0006)
+
+   Jack   Color  Description                  Node     PinDefault             Original Verbs
+--------------------------------------------------------------------------------------------------------
+Digital Unknown  Digital Out at Int HDMI      5 0x05   0x18560110   20571c10 20571d01 20571e56 20571f18
+Digital Unknown  Digital Out at Int HDMI      7 0x07   0x58560121   20771c21 20771d01 20771e56 20771f58
+Digital Unknown  Digital Out at Int HDMI      9 0x09   0x58560122   20971c22 20971d01 20971e56 20971f58
+Digital Unknown  Digital Out at Int HDMI     11 0x0b   0x58560123   20b71c23 20b71d01 20b71e56 20b71f58
+Digital Unknown  Digital Out at Int HDMI     13 0x0d   0x58560124   20d71c24 20d71d01 20d71e56 20d71f58
+--------------------------------------------------------------------------------------------------------
+
+
+   Jack   Color  Description                  Node     PinDefault             Modified Verbs
+--------------------------------------------------------------------------------------------------------
+Digital Unknown  Digital Out at Int HDMI      5 0x05   0x18560110   20571c10 20571d00 20571e56 20571f10
+Digital Unknown  Digital Out at Int HDMI      7 0x07   0x58560121   20771c20 20771d00 20771e56 20771f50
+Digital Unknown  Digital Out at Int HDMI      9 0x09   0x58560122   20971c30 20971d00 20971e56 20971f50
+Digital Unknown  Digital Out at Int HDMI     11 0x0b   0x58560123   20b71c40 20b71d00 20b71e56 20b71f50
+Digital Unknown  Digital Out at Int HDMI     13 0x0d   0x58560124   20d71c50 20d71d00 20d71e56 20d71f50
+--------------------------------------------------------------------------------------------------------
+

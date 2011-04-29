@@ -1,0 +1,109 @@
+Codec: Nvidia MCP77/78 HDMI
+Address: 2
+Function Id: 1
+Vendor Id: 282984454
+Subsystem Id: 282984705
+Revision Id: 1048576
+No Modem Function Group found
+Default PCM:
+    rates [0]:
+    bits [0]:
+    formats [0]:
+Default Amp-In caps: N/A
+Default Amp-Out caps: N/A
+GPIO: io=0, o=0, i=0, unsolicited=0, wake=0
+Node 4 [Audio Output] wcaps 529: Stereo Digital
+  Control: name="IEC958 Playback Con Mask", index=1, device=0
+  Control: name="IEC958 Playback Pro Mask", index=1, device=0
+  Control: name="IEC958 Playback Default", index=1, device=0
+  Control: name="IEC958 Playback Switch", index=1, device=0
+  Device: name="NVIDIA HDMI", type="HDMI", device=3
+  Converter: stream=0, channel=0
+  Digital:
+  Digital category: 0
+  PCM:
+    rates [192]: 48000 88200
+    bits [15]: 8 16 20 24
+    formats [1]: PCM
+Node 5 [Pin Complex] wcaps 4195201: Stereo Digital
+  Pincap 20: OUT Detect
+  Pin Default 408289552: [Jack] Digital Out at Int HDMI
+    Conn = Digital, Color = Unknown
+    DefAssociation = 1, Sequence = 0
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Connection: 1
+     4
+Node 6 [Audio Output] wcaps 529: Stereo Digital
+  Converter: stream=0, channel=0
+  Digital:
+  Digital category: 0
+  PCM:
+    rates [192]: 48000 88200
+    bits [15]: 8 16 20 24
+    formats [1]: PCM
+Node 7 [Pin Complex] wcaps 4195201: Stereo Digital
+  Pincap 20: OUT Detect
+  Pin Default 1482031393: [N/A] Digital Out at Int HDMI
+    Conn = Digital, Color = Unknown
+    DefAssociation = 2, Sequence = 1
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Connection: 1
+     6
+Node 8 [Audio Output] wcaps 529: Stereo Digital
+  Converter: stream=0, channel=0
+  Digital:
+  Digital category: 0
+  PCM:
+    rates [192]: 48000 88200
+    bits [15]: 8 16 20 24
+    formats [1]: PCM
+Node 9 [Pin Complex] wcaps 4195201: Stereo Digital
+  Pincap 20: OUT Detect
+  Pin Default 1482031394: [N/A] Digital Out at Int HDMI
+    Conn = Digital, Color = Unknown
+    DefAssociation = 2, Sequence = 2
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Connection: 1
+     8
+Node 10 [Audio Output] wcaps 529: Stereo Digital
+  Converter: stream=0, channel=0
+  Digital:
+  Digital category: 0
+  PCM:
+    rates [192]: 48000 88200
+    bits [15]: 8 16 20 24
+    formats [1]: PCM
+Node 11 [Pin Complex] wcaps 4195201: Stereo Digital
+  Pincap 20: OUT Detect
+  Pin Default 1482031395: [N/A] Digital Out at Int HDMI
+    Conn = Digital, Color = Unknown
+    DefAssociation = 2, Sequence = 3
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Connection: 1
+     10
+Node 12 [Audio Output] wcaps 529: Stereo Digital
+  Converter: stream=0, channel=0
+  Digital:
+  Digital category: 0
+  PCM:
+    rates [192]: 48000 88200
+    bits [15]: 8 16 20 24
+    formats [1]: PCM
+Node 13 [Pin Complex] wcaps 4195201: Stereo Digital
+  Pincap 20: OUT Detect
+  Pin Default 1482031396: [N/A] Digital Out at Int HDMI
+    Conn = Digital, Color = Unknown
+    DefAssociation = 2, Sequence = 4
+    Misc = NO_PRESENCE
+  Pin-ctls: 64: OUT
+  Unsolicited: tag=00, enabled=0
+  Connection: 1
+     12

@@ -4879,46 +4879,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x02,               // Length
                             )
                     })
-                    Name (BUF1, ResourceTemplate ()
-                    {
-                        IO (Decode16,
-                            0x0070,             // Range Minimum
-                            0x0070,             // Range Maximum
-                            0x01,               // Alignment
-                            0x08,               // Length
-                            )
-                    })
                     Method (_CRS, 0, Serialized)
                     {
                         Return (BUF0)
                     }
                 }
-
-                Device (HPET)
-                {
-                    Name (_HID, EisaId ("PNP0103"))
-                    Name (BUF0, ResourceTemplate ()
-                    {
-                        IRQNoFlags ()
-                            {0}
-                        IRQNoFlags ()
-                            {8}
-                        Memory32Fixed (ReadOnly,
-                            0xFED00000,         // Address Base
-                            0x00000400,         // Address Length
-                            )
-                    })
-                    Method (_STA, 0, NotSerialized)
-                    {
-                        Return (0x0F)
-                    }
-
-                    Method (_CRS, 0, Serialized)
-                    {
-                        Return (BUF0)
-                    }
-                }
-
                 Device (PIC)
                 {
                     Name (_HID, EisaId ("PNP0000"))
@@ -5603,8 +5568,30 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Notify (WMID, 0x80)
                     }
                 }
+                Device (HPET)
+                {
+                    Name (_HID, EisaId ("PNP0103"))
+                    Name (CRS, ResourceTemplate ()
+                    {
+                        IRQNoFlags ()
+                            {0}
+                        IRQNoFlags ()
+                            {8}
+                        Memory32Fixed (ReadOnly,
+                            0xFED00000,         // Address Base
+                            0x00000400,         // Address Length
+                            _Y09)
+                    })
+                    Method (_STA, 0, NotSerialized)
+                    {
+                        Return (0x0F)
+                    }
+                    Method (_CRS, 0, NotSerialized)
+                    {
+                        Return (CRS)
+                    }
+                }
             }
-
             Device (UHC1)
             {
                 Name (_ADR, 0x001D0000)

@@ -4191,19 +4191,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (LPC)
             {
                 Name (_ADR, 0x001F0000)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x02)
-                        {
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x18, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
                 OperationRegion (PRR0, PCI_Config, 0x60, 0x04)
                 Field (PRR0, AnyAcc, NoLock, Preserve)
                 {
@@ -4907,7 +4894,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (BUF0)
                     }
                 }
-                Device (PIC)
+                Device (IPIC)
                 {
                     Name (_HID, EisaId ("PNP0000"))
                     Name (_CRS, ResourceTemplate ()
@@ -5613,6 +5600,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (CRS)
                     }
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id",
+                            Buffer (0x04)
+                            {
+                                0x18, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
                 }
             }
             Device (UHC1)
@@ -6903,87 +6903,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
-            Device (SBUS)
-            {
-                Name (_ADR, 0x001F0003)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x04)
-                        {
-                            "name", 
-                            "pci8086,3a30", 
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x30, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
-                OperationRegion (SMBP, PCI_Config, 0x40, 0xC0)
-                Field (SMBP, DWordAcc, NoLock, Preserve)
-                {
-                        ,   2, 
-                    I2CE,   1
-                }
-                OperationRegion (SMBI, SystemIO, 0x8000, 0x10)
-                Field (SMBI, ByteAcc, NoLock, Preserve)
-                {
-                    HSSS,   8, 
-                            Offset (0x02), 
-                    HSCT,   8, 
-                    HSCD,   8, 
-                    XMSL,   8, 
-                    HSD0,   8
-                }
-                Method (SMAB, 3, Serialized)
-                {
-                    Acquire (_GL, 0xFFFF)
-                    Store (Zero, Local2)
-                    Store (0xFA, Local0)
-                    While (LAnd (And (HSSS, One), LGreater (Local0, Zero)))
-                    {
-                        Stall (0x64)
-                        Decrement (Local0)
-                    }
-                    If (Local0)
-                    {
-                        Store (Arg1, HSCD)
-                        Store (Arg0, XMSL)
-                        If (LEqual (And (Arg0, One), Zero))
-                        {
-                            Store (Arg2, HSD0)
-                        }
-                        Store (0xFF, HSSS)
-                        Store (0x48, HSCT)
-                        Store (0xFA, Local0)
-                        While (LAnd (LEqual (And (HSSS, 0x1E), Zero), LGreater (Local0, 
-                            Zero)))
-                        {
-                            Stall (0x64)
-                            Decrement (Local0)
-                        }
-                        And (HSSS, 0x1C, Local1)
-                        Store (0xFF, HSSS)
-                        If (LAnd (LEqual (Local1, Zero), And (Arg0, One)))
-                        {
-                            Store (HSD0, Local2)
-                        }
-                    }
-                    Else
-                    {
-                        Store (One, Local1)
-                    }
-                    Release (_GL)
-                    If (And (Arg0, One))
-                    {
-                        ShiftLeft (Local1, 0x08, Local3)
-                        Or (Local3, Local2, Local1)
-                    }
-                    Return (Local1)
-                }
-            }
             Device (ACEL)
             {
                 Name (_HID, EisaId ("HPQ0004"))
@@ -7159,6 +7078,33 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             },
                             "PinConfigurations",
                             Buffer (Zero) {}
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+            }
+            Device (SBUS)
+            {
+                Name (_ADR, 0x001F0003)
+                Device (BUS0)
+                {
+                    Name (_CID, "smbus")
+                    Name (_ADR, Zero)
+                    Device (DVL0)
+                    {
+                        Name (_ADR, 0x57)
+                        Name (_CID, "diagsvault")
+                    }
+                }
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id",
+                            Buffer (0x04)
+                            {
+                                0x30, 0x3A, 0x00, 0x00
+                            }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)

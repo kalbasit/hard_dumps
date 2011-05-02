@@ -881,7 +881,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         \_SB.PCI0.ACEL.ITAL ()
         \_SB.CHWL ()
         Notify (\_SB.PCI0.EXP4, Zero)
-        Return (Zero)
+        Return (Package (0x02)
+        {
+            Zero,
+            Zero
+        })
     }
     If (LEqual (DAS3, One))
     {

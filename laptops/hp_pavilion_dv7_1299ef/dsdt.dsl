@@ -1,3 +1,22 @@
+/*
+ * Intel ACPI Component Architecture
+ * AML Disassembler version 20110211-32 [Feb 12 2011]
+ * Copyright (c) 2000 - 2011 Intel Corporation
+ *
+ * Disassembly of dsdt.aml, Thu Apr 28 22:37:33 2011
+ *
+ * Original Table Header:
+ *     Signature        "DSDT"
+ *     Length           0x0000A822 (43042)
+ *     Revision         0x01 **** 32-bit table (V1), no 64-bit math support
+ *     Checksum         0xBA
+ *     OEM ID           "HP    "
+ *     OEM Table ID     "VADER   "
+ *     OEM Revision     0x00000001 (1)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20110211 (537985553)
+ */
+
 DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
 {
     Method (DTGP, 5, NotSerialized)

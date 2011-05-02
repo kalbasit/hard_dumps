@@ -881,11 +881,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         \_SB.PCI0.ACEL.ITAL ()
         \_SB.CHWL ()
         Notify (\_SB.PCI0.EXP4, Zero)
-        Return (Package (0x02)
-        {
-            Zero,
-            Zero
-        })
+        Return (Zero)
     }
     If (LEqual (DAS3, One))
     {
@@ -4191,6 +4187,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Device (LPC)
             {
                 Name (_ADR, 0x001F0000)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x18, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
                 OperationRegion (PRR0, PCI_Config, 0x60, 0x04)
                 Field (PRR0, AnyAcc, NoLock, Preserve)
                 {
@@ -4894,7 +4903,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (BUF0)
                     }
                 }
-                Device (IPIC)
+                Device (PIC)
                 {
                     Name (_HID, EisaId ("PNP0000"))
                     Name (_CRS, ResourceTemplate ()
@@ -5600,19 +5609,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (CRS)
                     }
-                }
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x02)
-                        {
-                            "device-id",
-                            Buffer (0x04)
-                            {
-                                0x18, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
                 }
             }
             Device (UHC1)
@@ -6910,9 +6906,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (Package (0x04)
                         {
-                            "name",
-                            "pci8086,3a30",
-                            "device-id",
+                            "name", 
+                            "pci8086,3a30", 
+                            "device-id", 
                             Buffer (0x04)
                             {
                                 0x30, 0x3A, 0x00, 0x00
@@ -6924,17 +6920,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 OperationRegion (SMBP, PCI_Config, 0x40, 0xC0)
                 Field (SMBP, DWordAcc, NoLock, Preserve)
                 {
-                        ,   2,
+                        ,   2, 
                     I2CE,   1
                 }
                 OperationRegion (SMBI, SystemIO, 0x8000, 0x10)
                 Field (SMBI, ByteAcc, NoLock, Preserve)
                 {
-                    HSSS,   8,
-                            Offset (0x02),
-                    HSCT,   8,
-                    HSCD,   8,
-                    XMSL,   8,
+                    HSSS,   8, 
+                            Offset (0x02), 
+                    HSCT,   8, 
+                    HSCD,   8, 
+                    XMSL,   8, 
                     HSD0,   8
                 }
                 Method (SMAB, 3, Serialized)
@@ -6958,7 +6954,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (0xFF, HSSS)
                         Store (0x48, HSCT)
                         Store (0xFA, Local0)
-                        While (LAnd (LEqual (And (HSSS, 0x1E), Zero), LGreater (Local0,
+                        While (LAnd (LEqual (And (HSSS, 0x1E), Zero), LGreater (Local0, 
                             Zero)))
                         {
                             Stall (0x64)

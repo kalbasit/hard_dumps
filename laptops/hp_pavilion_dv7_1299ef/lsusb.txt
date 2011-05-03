@@ -1,0 +1,13 @@
+Bus 008 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 005 Device 003: ID 046d:c526 Logitech, Inc. Nano Receiver
+Bus 005 Device 002: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 003 Device 002: ID 138a:0001 DigitalPersona, Inc Fingeprint Reader
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 002 Device 005: ID 0781:5406 SanDisk Corp. Cruzer Micro U3
+Bus 002 Device 004: ID 046d:09b8 Logitech, Inc.
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub

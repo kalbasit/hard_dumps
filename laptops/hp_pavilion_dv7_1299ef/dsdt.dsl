@@ -1,54 +1,23 @@
 /*
  * Intel ACPI Component Architecture
- * AML Disassembler version 20110211-32 [Feb 12 2011]
- * Copyright (c) 2000 - 2011 Intel Corporation
+ * AML Disassembler version 20080926
  *
- * Disassembly of dsdt.aml, Thu Apr 28 22:37:33 2011
+ * Disassembly of dsdt.aml, Sat May  7 22:57:56 2011
+ *
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000A822 (43042)
- *     Revision         0x01 **** 32-bit table (V1), no 64-bit math support
- *     Checksum         0xBA
- *     OEM ID           "HP    "
- *     OEM Table ID     "VADER   "
+ *     Length           0x0000AEF5 (44789)
+ *     Revision         0x01 **** ACPI 1.0, no 64-bit math support
+ *     Checksum         0x17
+ *     OEM ID           "APPLE "
+ *     OEM Table ID     "eMxyzptlk"
  *     OEM Revision     0x00000001 (1)
  *     Compiler ID      "INTL"
- *     Compiler Version 0x20110211 (537985553)
+ *     Compiler Version 0x20091214 (537465364)
  */
-
-DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
+DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
 {
-    Method (DTGP, 5, NotSerialized)
-    {
-        If (LEqual (Arg0, Buffer (0x10)
-                {
-                    /* 0000 */    0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44, 
-                    /* 0008 */    0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
-                }))
-        {
-            If (LEqual (Arg1, One))
-            {
-                If (LEqual (Arg2, Zero))
-                {
-                    Store (Buffer (One)
-                        {
-                            0x03
-                        }, Arg4)
-                    Return (One)
-                }
-                If (LEqual (Arg2, One))
-                {
-                    Return (One)
-                }
-            }
-        }
-        Store (Buffer (One)
-            {
-                0x00
-            }, Arg4)
-        Return (Zero)
-    }
     Name (SP2O, 0x4E)
     Name (SP1O, 0x164E)
     Name (IO1B, 0x0600)
@@ -126,6 +95,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         GIO1,   32, 
         GPL1,   32
     }
+
     OperationRegion (PMBA, SystemIO, 0x0400, 0x80)
     Field (PMBA, ByteAcc, NoLock, Preserve)
     {
@@ -140,6 +110,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         SCIS,   1, 
                 Offset (0x66)
     }
+
     OperationRegion (RCRB, SystemMemory, 0xFED1C000, 0x4000)
     Field (RCRB, DWordAcc, Lock, Preserve)
     {
@@ -163,6 +134,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         RP5D,   1, 
         RP6D,   1
     }
+
     OperationRegion (MBOX, SystemMemory, 0xBDFBEC18, 0x02BC)
     Field (MBOX, AnyAcc, NoLock, Preserve)
     {
@@ -574,6 +546,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         SPOS,   8, 
         DRSV,   784
     }
+
     OperationRegion (IO_T, SystemIO, 0x0800, 0x10)
     Field (IO_T, ByteAcc, NoLock, Preserve)
     {
@@ -590,16 +563,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Offset (0x0F), 
                 Offset (0x10)
     }
+
     OperationRegion (IO_D, SystemIO, 0x0810, 0x08)
     Field (IO_D, ByteAcc, NoLock, Preserve)
     {
         TRPD,   8
     }
+
     OperationRegion (IO_H, SystemIO, 0x0820, 0x04)
     Field (IO_H, ByteAcc, NoLock, Preserve)
     {
         TRPH,   8
     }
+
     OperationRegion (NVST, SystemMemory, 0xBDFBEED4, 0xCD)
     Field (NVST, AnyAcc, Lock, Preserve)
     {
@@ -718,49 +694,49 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         WWAT,   8, 
         UNDP,   8
     }
+
     Scope (_PR)
     {
-        Processor (CPU0, 0x01, 0x00000000, 0x06)
-        {
-        }
-        Processor (CPU1, 0x02, 0x00000000, 0x06)
-        {
-        }
-        Processor (CPU2, 0x03, 0x00000000, 0x06)
-        {
-        }
-        Processor (CPU3, 0x04, 0x00000000, 0x06)
-        {
-        }
+        Processor (CPU0, 0x01, 0x00000410, 0x06) {}
+        Processor (CPU1, 0x02, 0x00000410, 0x06) {}
+        Processor (CPU2, 0x03, 0x00000410, 0x06) {}
+        Processor (CPU3, 0x04, 0x00000410, 0x06) {}
     }
+
     OperationRegion (PRT0, SystemIO, 0x80, 0x04)
     Field (PRT0, DWordAcc, Lock, Preserve)
     {
         P80H,   32
     }
+
     Method (P8XH, 2, Serialized)
     {
         If (LEqual (Arg0, Zero))
         {
             Store (Or (And (P80D, 0xFFFFFF00), Arg1), P80D)
         }
+
         If (LEqual (Arg0, One))
         {
             Store (Or (And (P80D, 0xFFFF00FF), ShiftLeft (Arg1, 0x08)
                 ), P80D)
         }
+
         If (LEqual (Arg0, 0x02))
         {
             Store (Or (And (P80D, 0xFF00FFFF), ShiftLeft (Arg1, 0x10)
                 ), P80D)
         }
+
         If (LEqual (Arg0, 0x03))
         {
             Store (Or (And (P80D, 0x00FFFFFF), ShiftLeft (Arg1, 0x18)
                 ), P80D)
         }
+
         Store (P80D, P80H)
     }
+
     Method (TRAP, 2, Serialized)
     {
         Store (Arg1, SMIF)
@@ -768,50 +744,63 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
         {
             Store (Zero, TRP0)
         }
+
         If (LEqual (Arg0, TRTD))
         {
             Store (Arg1, DTSF)
             Store (Zero, TRPD)
             Return (DTSF)
         }
+
         If (LEqual (Arg0, TRTI))
         {
             Store (Zero, TRPH)
         }
+
         Return (SMIF)
     }
+
     OperationRegion (CMS1, SystemIO, 0x72, 0x02)
     Field (CMS1, ByteAcc, NoLock, Preserve)
     {
         CMSI,   8, 
         CMSD,   8
     }
+
     Method (CMSR, 1, NotSerialized)
     {
         Store (Arg0, CMSI)
         Store (CMSD, Local0)
         Return (Local0)
     }
+
     Method (CMSW, 2, NotSerialized)
     {
         Store (Arg0, CMSI)
         Store (Arg1, CMSD)
     }
+
     Method (_PTS, 1, NotSerialized)
     {
-        If (LEqual (Arg0, 0x03))
+        If (LEqual (Arg0, 0x05)) {}
+        Else
         {
-            Store (0x53, P80H)
+            If (LEqual (Arg0, 0x03))
+            {
+                Store (0x53, P80H)
+            }
+
+            And (GIO0, 0xFFFFDFFF, GIO0)
+            If (LEqual (Arg0, 0x04))
+            {
+                CMSW (0x6E, 0x6E)
+            }
+
+            Or (GPL0, 0x01000000, GPL0)
+            Or (GPL1, 0x0100, GPL1)
         }
-        And (GIO0, 0xFFFFDFFF, GIO0)
-        If (LEqual (Arg0, 0x04))
-        {
-            CMSW (0x6E, 0x6E)
-        }
-        Or (GPL0, 0x01000000, GPL0)
-        Or (GPL1, 0x0100, GPL1)
-        Return (Zero)
     }
+
     Method (_WAK, 1, NotSerialized)
     {
         Store (CMSR (0x3E), Local0)
@@ -820,6 +809,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Notify (\_SB.PWRB, 0x02)
             CMSW (0x3E, Zero)
         }
+
         CMSW (0x6E, Zero)
         \_SB.HSWK (Arg0)
         Notify (\_SB.PCI0.EXP5, Zero)
@@ -830,6 +820,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Notify (\_SB.PCI0.EXP1, Zero)
             }
         }
+
         If (LEqual (RP2D, Zero))
         {
             If (LEqual (\_SB.PCI0.EXP2.PDSX, One))
@@ -837,6 +828,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Notify (\_SB.PCI0.EXP2, Zero)
             }
         }
+
         If (LEqual (RP3D, Zero))
         {
             If (LEqual (\_SB.PCI0.EXP3.PDSX, One))
@@ -844,6 +836,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Notify (\_SB.PCI0.EXP3, Zero)
             }
         }
+
         If (LEqual (RP4D, Zero))
         {
             If (LEqual (\_SB.PCI0.EXP4.PDSX, One))
@@ -851,6 +844,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Notify (\_SB.PCI0.EXP4, Zero)
             }
         }
+
         If (LEqual (RP5D, Zero))
         {
             If (LEqual (\_SB.PCI0.EXP5.PDSX, One))
@@ -858,6 +852,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Notify (\_SB.PCI0.EXP5, Zero)
             }
         }
+
         If (LEqual (Arg0, 0x03))
         {
             If (LAnd (DTSE, CMPE))
@@ -865,9 +860,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (0x14, DTSF)
                 Store (Zero, TRPD)
             }
+
             Notify (\_SB.PCI0.PVGA.EVGA.LCD, 0x02)
             Store (0xE3, P80H)
         }
+
         If (LEqual (Arg0, 0x04))
         {
             If (LAnd (DTSE, CMPE))
@@ -875,14 +872,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (0x14, DTSF)
                 Store (Zero, TRPD)
             }
+
             Notify (\_SB.PCI0.PVGA.EVGA.LCD, 0x02)
             \_SB.PCI0.LPC.EC0.OSTE ()
         }
+
         \_SB.PCI0.ACEL.ITAL ()
         \_SB.CHWL ()
         Notify (\_SB.PCI0.EXP4, Zero)
         Return (Zero)
     }
+
     If (LEqual (DAS3, One))
     {
         Name (_S3, Package (0x04)
@@ -893,6 +893,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Zero
         })
     }
+
     Name (_S4, Package (0x04)
     {
         0x06, 
@@ -922,9 +923,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, \_SB.PCI0.EXP1.PDCX)
                     }
+
                     Store (One, \_SB.PCI0.EXP1.HPSX)
                 }
             }
+
             If (LNotEqual (\_SB.PCI0.EXP2.VDID, 0xFFFF))
             {
                 If (\_SB.PCI0.EXP2.HPSX)
@@ -933,9 +936,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, \_SB.PCI0.EXP2.PDCX)
                     }
+
                     Store (One, \_SB.PCI0.EXP2.HPSX)
                 }
             }
+
             If (LNotEqual (\_SB.PCI0.EXP3.VDID, 0xFFFF))
             {
                 If (\_SB.PCI0.EXP3.HPSX)
@@ -944,9 +949,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, \_SB.PCI0.EXP3.PDCX)
                     }
+
                     Store (One, \_SB.PCI0.EXP3.HPSX)
                 }
             }
+
             If (LNotEqual (\_SB.PCI0.EXP4.VDID, 0xFFFF))
             {
                 If (\_SB.PCI0.EXP4.HPSX)
@@ -955,9 +962,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, \_SB.PCI0.EXP4.PDCX)
                     }
+
                     Store (One, \_SB.PCI0.EXP4.HPSX)
                 }
             }
+
             If (LAnd (LEqual (RP5D, Zero), \_SB.PCI0.EXP5.HPSX))
             {
                 Sleep (0x64)
@@ -981,6 +990,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Sleep (0x64)
                     }
+
                     Notify (\_SB.PCI0.EXP5, Zero)
                 }
                 Else
@@ -988,6 +998,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (One, \_SB.PCI0.EXP5.HPSX)
                 }
             }
+
             If (LNotEqual (\_SB.PCI0.EXP6.VDID, 0xFFFF))
             {
                 If (\_SB.PCI0.EXP6.HPSX)
@@ -996,35 +1007,43 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, \_SB.PCI0.EXP6.PDCX)
                     }
+
                     Store (One, \_SB.PCI0.EXP6.HPSX)
                 }
             }
+
             Sleep (0x64)
             If (LNotEqual (\_SB.PCI0.EXP1.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP1, Zero)
             }
+
             If (LNotEqual (\_SB.PCI0.EXP2.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP2, Zero)
             }
+
             If (LNotEqual (\_SB.PCI0.EXP3.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP3, Zero)
             }
+
             If (LNotEqual (\_SB.PCI0.EXP4.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP4, Zero)
             }
+
             If (LNotEqual (\_SB.PCI0.EXP5.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP5, Zero)
             }
+
             If (LNotEqual (\_SB.PCI0.EXP6.VDID, 0xFFFF))
             {
                 Notify (\_SB.PCI0.EXP6, Zero)
             }
         }
+
         Method (_L06, 0, NotSerialized)
         {
             If (\_SB.PCI0.OVGA.GSSE)
@@ -1036,9 +1055,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (One, SCIS)
             }
         }
+
         Method (_L07, 0, NotSerialized)
         {
         }
+
         Method (_L09, 0, NotSerialized)
         {
             Notify (\_SB.PCI0.EXP1, 0x02)
@@ -1049,36 +1070,46 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Notify (\_SB.PCI0.EXP5, 0x02)
             Notify (\_SB.PCI0.EXP6, 0x02)
         }
+
         Method (_L0B, 0, NotSerialized)
         {
             Notify (\_SB.PCI0.P32, 0x02)
         }
+
         Method (_L03, 0, NotSerialized)
         {
             Notify (\_SB.PCI0.UHC1, 0x02)
+            Notify (\_SB.PWRB, 0x02)
         }
+
         Method (_L04, 0, NotSerialized)
         {
             Notify (\_SB.PCI0.UHC2, 0x02)
+            Notify (\_SB.PWRB, 0x02)
         }
+
         Method (_L0C, 0, NotSerialized)
         {
             Notify (\_SB.PCI0.UHC3, 0x02)
+            Notify (\_SB.PWRB, 0x02)
         }
+
         Method (_L20, 0, NotSerialized)
         {
         }
+
         Method (_L0D, 0, NotSerialized)
         {
-            Notify (\_SB.PCI0.HDEF, 0x02)
-            Notify (\_SB.PCI0.EHC2, 0x02)
         }
+
         Method (_L0E, 0, NotSerialized)
         {
         }
+
         Method (_L05, 0, NotSerialized)
         {
         }
+
         Method (_L1B, 0, NotSerialized)
         {
             XOr (GIV, 0x0800, Local0)
@@ -1087,10 +1118,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             \_SB.PCI0.ACEL.AJAL ()
         }
     }
+
     Method (_PIC, 1, NotSerialized)
     {
         Store (Arg0, GPIC)
     }
+
     Scope (_TZ)
     {
         PowerResource (FN00, 0x00, 0x0000)
@@ -1108,8 +1141,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (Zero)
                     }
                 }
+
                 Return (One)
             }
+
             Method (_ON, 0, Serialized)
             {
                 If (ECON)
@@ -1117,6 +1152,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (One, \_SB.PCI0.LPC.EC0.FAN1)
                 }
             }
+
             Method (_OFF, 0, Serialized)
             {
                 If (ECON)
@@ -1125,6 +1161,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 }
             }
         }
+
         Device (FAN)
         {
             Name (_HID, EisaId ("PNP0C0B"))
@@ -1134,6 +1171,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 FN00
             })
         }
+
         ThermalZone (THRM)
         {
             Name (REGN, "Processor Thermal Zone")
@@ -1145,12 +1183,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Return (Multiply (\_SB.PCI0.LPC.EC0.FNSP, 0x64))
                 }
+
                 Return (Package (0x02)
                 {
                     Zero, 
                     Zero
                 })
             }
+
             Method (FSSP, 1, NotSerialized)
             {
                 If (ECON)
@@ -1158,22 +1198,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (And (LNot (Arg0), One), \_SB.PCI0.LPC.EC0.FNFG)
                 }
             }
+
             Method (_TMP, 0, Serialized)
             {
                 If (ECON)
                 {
                     Return (Add (0x0AAC, Multiply (\_SB.PCI0.LPC.EC0.CTMP, 0x0A)))
                 }
+
                 Return (0x0BB8)
             }
+
             Method (_AC0, 0, Serialized)
             {
                 If (ECON)
                 {
                     Return (Add (0x0AAC, Multiply (\_SB.PCI0.LPC.EC0.CTMP, 0x0A)))
                 }
+
                 Return (0x0BB8)
             }
+
             Method (_PSV, 0, Serialized)
             {
                 If (ECON)
@@ -1182,10 +1227,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (0x0E12)
                     }
+
                     If (LEqual (TJ85, 0x5A))
                     {
                         Return (0x0E30)
                     }
+
                     If (LEqual (TJ85, 0x64))
                     {
                         Return (0x0E94)
@@ -1195,8 +1242,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x0EA8)
                     }
                 }
+
                 Return (Zero)
             }
+
             Method (_CRT, 0, Serialized)
             {
                 If (ECON)
@@ -1205,10 +1254,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (0x0E44)
                     }
+
                     If (LEqual (TJ85, 0x5A))
                     {
                         Return (0x0E76)
                     }
+
                     If (LEqual (TJ85, 0x64))
                     {
                         Return (0x0EDA)
@@ -1218,8 +1269,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x0EDA)
                     }
                 }
+
                 Return (0x1388)
             }
+
             Method (_HOT, 0, NotSerialized)
             {
                 If (LGreaterEqual (OSYS, 0x07D6))
@@ -1230,10 +1283,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Return (0x0E30)
                         }
+
                         If (LEqual (TJ85, 0x5A))
                         {
                             Return (0x0E62)
                         }
+
                         If (LEqual (TJ85, 0x64))
                         {
                             Return (0x0EC6)
@@ -1244,12 +1299,15 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Return (0x1388)
             }
+
             Method (_SCP, 1, Serialized)
             {
                 Store (Arg0, CTYP)
             }
+
             Name (_AL0, Package (0x01)
             {
                 FAN
@@ -1264,25 +1322,21 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         \_PR.CPU1
                     })
                 }
+
                 Return (Package (0x01)
                 {
                     \_PR.CPU0
                 })
             }
+
             Name (_TC1, 0x02)
             Name (_TC2, 0x05)
             Name (_TSP, 0x0A)
         }
     }
+
     Scope (_SB)
     {
-        Device (PNLF)
-        {
-            Name (_HID, EisaId ("APP0002"))
-            Name (_CID, "backlight")
-            Name (_UID, 0x0A)
-            Name (_STA, 0x0B)
-        }
         Device (PWRB)
         {
             Name (_HID, EisaId ("PNP0C0C"))
@@ -1291,6 +1345,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Return (0x0B)
             }
         }
+
         Device (LID0)
         {
             Name (_HID, EisaId ("PNP0C0D"))
@@ -1301,9 +1356,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (One, Local0)
                 }
+
                 Return (Local0)
             }
         }
+
         Device (SLPB)
         {
             Name (_HID, EisaId ("PNP0C0E"))
@@ -1313,6 +1370,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 0x04
             })
         }
+
         Device (BAT0)
         {
             Name (_HID, EisaId ("PNP0C0A"))
@@ -1332,9 +1390,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x1F)
                     }
                 }
+
                 Sleep (0x30)
                 Return (0x0F)
             }
+
             Name (PKG1, Package (0x0D)
             {
                 One, 
@@ -1369,12 +1429,15 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Multiply (Local2, 0x03, Local2)
                         Store (Local2, Index (PKG1, 0x06))
                     }
+
                     Sleep (0x30)
                     Store (^^PCI0.LPC.EC0.BDV0, Local0)
                     Store (Local0, Index (PKG1, 0x04))
                 }
+
                 Return (PKG1)
             }
+
             Name (PKG2, Package (0x04)
             {
                 Zero, 
@@ -1398,12 +1461,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (Local1, Index (PKG2, 0x02))
                     Store (Local2, Index (PKG2, 0x03))
                 }
+
                 Return (PKG2)
             }
         }
+
         Device (AC)
         {
-            Name (_HID, "ACPI000")
+            Name (_HID, "ACPI0003")
             Name (_PCL, Package (0x01)
             {
                 _SB
@@ -1417,9 +1482,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     ^^PCI0.ACEL.AJAL ()
                     Sleep (0x40)
                 }
+
                 Return (PWRS)
             }
+
+            Name (_PRW, Package (0x02)
+            {
+                0x18, 
+                0x03
+            })
         }
+
         Device (PCI0)
         {
             Name (_HID, EisaId ("PNP0A08"))
@@ -1433,14 +1506,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (0x03E8, OSYS)
                     }
+
                     If (_OSI ("Windows 2001"))
                     {
                         Store (0x07D1, OSYS)
                     }
+
                     If (_OSI ("Windows 2006"))
                     {
                         Store (0x07D6, OSYS)
                     }
+
                     If (_OSI ("Windows 2009"))
                     {
                         Store (0x07D9, OSYS)
@@ -1450,7 +1526,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (0x07D0, OSYS)
                 }
+
+                If (_OSI ("Darwin"))
+                {
+                    Store (0x07D6, OSYS)
+                }
             }
+
             Name (_BBN, Zero)
             OperationRegion (HBUS, PCI_Config, 0x40, 0xC0)
             Field (HBUS, DWordAcc, NoLock, Preserve)
@@ -1515,6 +1597,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 GTSE,   1, 
                         Offset (0x8A)
             }
+
             OperationRegion (MCHT, SystemMemory, 0xFED11000, 0xFF)
             Field (MCHT, ByteAcc, NoLock, Preserve)
             {
@@ -1525,6 +1608,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Offset (0xEF), 
                 ESCS,   8
             }
+
             Name (BUF0, ResourceTemplate ()
             {
                 WordBusNumber (ResourceProducer, MinFixed, MaxFixed, PosDecode,
@@ -1654,10 +1738,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     ,, _Y0C, AddressRangeMemory, TypeStatic)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
-                    0xFEBFFFFE,         // Range Minimum
+                    0x00000000,         // Range Minimum
                     0xFEBFFFFF,         // Range Maximum
                     0x00000000,         // Translation Offset
-                    0x00000002,         // Length
+                    0xFEC00000,         // Length
                     ,, _Y0D, AddressRangeMemory, TypeStatic)
                 DWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, Cacheable, ReadWrite,
                     0x00000000,         // Granularity
@@ -1674,131 +1758,157 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     CreateDWordField (BUF0, \_SB.PCI0._Y00._LEN, C0LN)
                     Store (Zero, C0LN)
                 }
+
                 If (LEqual (PM1L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y00._RW, C0RW)
                     Store (Zero, C0RW)
                 }
+
                 If (PM1H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y01._LEN, C4LN)
                     Store (Zero, C4LN)
                 }
+
                 If (LEqual (PM1H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y01._RW, C4RW)
                     Store (Zero, C4RW)
                 }
+
                 If (PM2L)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y02._LEN, C8LN)
                     Store (Zero, C8LN)
                 }
+
                 If (LEqual (PM2L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y02._RW, C8RW)
                     Store (Zero, C8RW)
                 }
+
                 If (PM2H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y03._LEN, CCLN)
                     Store (Zero, CCLN)
                 }
+
                 If (LEqual (PM2H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y03._RW, CCRW)
                     Store (Zero, CCRW)
                 }
+
                 If (PM3L)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y04._LEN, D0LN)
                     Store (Zero, D0LN)
                 }
+
                 If (LEqual (PM3L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y04._RW, D0RW)
                     Store (Zero, D0RW)
                 }
+
                 If (PM3H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y05._LEN, D4LN)
                     Store (Zero, D4LN)
                 }
+
                 If (LEqual (PM3H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y05._RW, D4RW)
                     Store (Zero, D4RW)
                 }
+
                 If (PM4L)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y06._LEN, D8LN)
                     Store (Zero, D8LN)
                 }
+
                 If (LEqual (PM4L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y06._RW, D8RW)
                     Store (Zero, D8RW)
                 }
+
                 If (PM4H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y07._LEN, DCLN)
                     Store (Zero, DCLN)
                 }
+
                 If (LEqual (PM4H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y07._RW, DCRW)
                     Store (Zero, DCRW)
                 }
+
                 If (PM5L)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y08._LEN, E0LN)
                     Store (Zero, E0LN)
                 }
+
                 If (LEqual (PM5L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y08._RW, E0RW)
                     Store (Zero, E0RW)
                 }
+
                 If (PM5H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y09._LEN, E4LN)
                     Store (Zero, E4LN)
                 }
+
                 If (LEqual (PM5H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y09._RW, E4RW)
                     Store (Zero, E4RW)
                 }
+
                 If (PM6L)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y0A._LEN, E8LN)
                     Store (Zero, E8LN)
                 }
+
                 If (LEqual (PM6L, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y0A._RW, E8RW)
                     Store (Zero, E8RW)
                 }
+
                 If (PM6H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y0B._LEN, ECLN)
                     Store (Zero, ECLN)
                 }
+
                 If (LEqual (PM6H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y0B._RW, ECRW)
                     Store (Zero, ECRW)
                 }
+
                 If (PM0H)
                 {
                     CreateDWordField (BUF0, \_SB.PCI0._Y0C._LEN, F0LN)
                     Store (Zero, F0LN)
                 }
+
                 If (LEqual (PM0H, One))
                 {
                     CreateBitField (BUF0, \_SB.PCI0._Y0C._RW, F0RW)
                     Store (Zero, F0RW)
                 }
+
                 CreateDWordField (BUF0, \_SB.PCI0._Y0D._MIN, M1MN)
                 CreateDWordField (BUF0, \_SB.PCI0._Y0D._MAX, M1MX)
                 CreateDWordField (BUF0, \_SB.PCI0._Y0D._LEN, M1LN)
@@ -1806,6 +1916,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Add (Subtract (M1MX, M1MN), One, M1LN)
                 Return (BUF0)
             }
+
             Method (_PRT, 0, NotSerialized)
             {
                 If (LEqual (GPIC, Zero))
@@ -1819,6 +1930,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -1826,6 +1938,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKB, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -1833,6 +1946,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -1840,6 +1954,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKD, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0002FFFF, 
@@ -1847,6 +1962,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -1854,6 +1970,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -1861,6 +1978,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKB, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -1868,6 +1986,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -1875,6 +1994,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKD, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x0019FFFF, 
@@ -1882,6 +2002,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKG, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -1889,6 +2010,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -1896,6 +2018,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKB, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -1903,6 +2026,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -1910,6 +2034,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKD, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001BFFFF, 
@@ -1917,6 +2042,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKG, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -1924,6 +2050,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -1931,6 +2058,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKB, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -1938,6 +2066,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -1945,6 +2074,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKD, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -1952,6 +2082,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKE, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -1959,6 +2090,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKG, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -1966,6 +2098,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -1973,6 +2106,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKD, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -1980,6 +2114,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKA, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -1987,6 +2122,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKF, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -1994,6 +2130,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ^LPC.LNKC, 
                             Zero
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -2014,6 +2151,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -2021,6 +2159,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x11
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -2028,6 +2167,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x0001FFFF, 
@@ -2035,6 +2175,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x13
                         }, 
+
                         Package (0x04)
                         {
                             0x0002FFFF, 
@@ -2042,6 +2183,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -2049,6 +2191,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -2056,6 +2199,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x11
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -2063,6 +2207,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x0003FFFF, 
@@ -2070,6 +2215,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x13
                         }, 
+
                         Package (0x04)
                         {
                             0x0019FFFF, 
@@ -2077,6 +2223,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x16
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -2084,6 +2231,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -2091,6 +2239,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x11
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -2098,6 +2247,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x001AFFFF, 
@@ -2105,6 +2255,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x13
                         }, 
+
                         Package (0x04)
                         {
                             0x001BFFFF, 
@@ -2112,6 +2263,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x16
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -2119,6 +2271,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -2126,6 +2279,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x11
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -2133,6 +2287,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x001CFFFF, 
@@ -2140,6 +2295,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x13
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -2147,6 +2303,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x14
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -2154,6 +2311,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x16
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -2161,6 +2319,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x001DFFFF, 
@@ -2168,6 +2327,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x13
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -2175,6 +2335,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x10
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -2182,6 +2343,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x15
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -2189,6 +2351,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero, 
                             0x12
                         }, 
+
                         Package (0x04)
                         {
                             0x001FFFFF, 
@@ -2199,6 +2362,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     })
                 }
             }
+
             Device (OVGA)
             {
                 Name (_ADR, 0x00020000)
@@ -2209,10 +2373,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Offset (0x95), 
                     IRES,   24
                 }
+
                 Method (_DOS, 1, NotSerialized)
                 {
                     Store (And (Arg0, 0x07), DSEN)
                 }
+
                 Method (_DOD, 0, NotSerialized)
                 {
                     Store (Zero, NDID)
@@ -2220,22 +2386,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (SDDL (DID1), DID1)
                     }
+
                     If (LNotEqual (DDL2, Zero))
                     {
                         Store (SDDL (DID2), DID2)
                     }
+
                     If (LNotEqual (DDL3, Zero))
                     {
                         Store (SDDL (DID3), DID3)
                     }
+
                     If (LNotEqual (DDL4, Zero))
                     {
                         Store (SDDL (DID4), DID4)
                     }
+
                     If (LNotEqual (DDL5, Zero))
                     {
                         Store (SDDL (DID5), DID5)
                     }
+
                     If (LEqual (NDID, One))
                     {
                         Name (TMP1, Package (0x01)
@@ -2245,6 +2416,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Or (0x00010000, DID1), Index (TMP1, Zero))
                         Return (TMP1)
                     }
+
                     If (LEqual (NDID, 0x02))
                     {
                         Name (TMP2, Package (0x02)
@@ -2256,6 +2428,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Or (0x00010000, DID2), Index (TMP2, One))
                         Return (TMP2)
                     }
+
                     If (LEqual (NDID, 0x03))
                     {
                         Name (TMP3, Package (0x03)
@@ -2269,6 +2442,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Or (0x00010000, DID3), Index (TMP3, 0x02))
                         Return (TMP3)
                     }
+
                     If (LEqual (NDID, 0x04))
                     {
                         Name (TMP4, Package (0x04)
@@ -2284,6 +2458,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Or (0x00010000, DID4), Index (TMP4, 0x03))
                         Return (TMP4)
                     }
+
                     If (LGreater (NDID, 0x04))
                     {
                         Name (TMP5, Package (0x05)
@@ -2301,11 +2476,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Or (0x00010000, DID5), Index (TMP5, 0x04))
                         Return (TMP5)
                     }
+
                     Return (Package (0x01)
                     {
                         0x0400
                     })
                 }
+
                 Device (DD01)
                 {
                     Method (_ADR, 0, Serialized)
@@ -2319,14 +2496,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (And (0xFFFF, DID1))
                         }
                     }
+
                     Method (_DCS, 0, NotSerialized)
                     {
                         Return (CDDS (DID1))
                     }
+
                     Method (_DGS, 0, NotSerialized)
                     {
                         Return (NDDS (DID1))
                     }
+
                     Method (_DSS, 1, NotSerialized)
                     {
                         If (LEqual (And (Arg0, 0xC0000000), 0xC0000000))
@@ -2335,6 +2515,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (DD02)
                 {
                     Method (_ADR, 0, Serialized)
@@ -2348,14 +2529,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (And (0xFFFF, DID2))
                         }
                     }
+
                     Method (_DCS, 0, NotSerialized)
                     {
                         Return (CDDS (DID2))
                     }
+
                     Method (_DGS, 0, NotSerialized)
                     {
                         Return (NDDS (DID2))
                     }
+
                     Method (_DSS, 1, NotSerialized)
                     {
                         If (LEqual (And (Arg0, 0xC0000000), 0xC0000000))
@@ -2364,6 +2548,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (DD03)
                 {
                     Method (_ADR, 0, Serialized)
@@ -2377,6 +2562,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (And (0xFFFF, DID3))
                         }
                     }
+
                     Method (_DCS, 0, NotSerialized)
                     {
                         If (LEqual (DID3, Zero))
@@ -2388,10 +2574,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (CDDS (DID3))
                         }
                     }
+
                     Method (_DGS, 0, NotSerialized)
                     {
                         Return (NDDS (DID3))
                     }
+
                     Method (_DSS, 1, NotSerialized)
                     {
                         If (LEqual (And (Arg0, 0xC0000000), 0xC0000000))
@@ -2399,6 +2587,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (NSTE, CSTE)
                         }
                     }
+
                     Method (_BCL, 0, NotSerialized)
                     {
                         Return (Package (0x0D)
@@ -2418,6 +2607,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x64
                         })
                     }
+
                     Method (_BCM, 1, NotSerialized)
                     {
                         If (ECON)
@@ -2427,6 +2617,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (DD04)
                 {
                     Method (_ADR, 0, Serialized)
@@ -2440,6 +2631,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (And (0xFFFF, DID4))
                         }
                     }
+
                     Method (_DCS, 0, NotSerialized)
                     {
                         If (LEqual (DID4, Zero))
@@ -2451,10 +2643,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (CDDS (DID4))
                         }
                     }
+
                     Method (_DGS, 0, NotSerialized)
                     {
                         Return (NDDS (DID4))
                     }
+
                     Method (_DSS, 1, NotSerialized)
                     {
                         If (LEqual (And (Arg0, 0xC0000000), 0xC0000000))
@@ -2463,6 +2657,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (DD05)
                 {
                     Method (_ADR, 0, Serialized)
@@ -2476,6 +2671,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (And (0xFFFF, DID5))
                         }
                     }
+
                     Method (_DCS, 0, NotSerialized)
                     {
                         If (LEqual (DID5, Zero))
@@ -2487,10 +2683,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (CDDS (DID5))
                         }
                     }
+
                     Method (_DGS, 0, NotSerialized)
                     {
                         Return (NDDS (DID5))
                     }
+
                     Method (_DSS, 1, NotSerialized)
                     {
                         If (LEqual (And (Arg0, 0xC0000000), 0xC0000000))
@@ -2499,6 +2697,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Method (SDDL, 1, NotSerialized)
                 {
                     Increment (NDID)
@@ -2508,108 +2707,135 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL2, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL3, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL4, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL5, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL6, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL7, Local0))
                     {
                         Return (Local1)
                     }
+
                     If (LEqual (DDL8, Local0))
                     {
                         Return (Local1)
                     }
+
                     Return (Zero)
                 }
+
                 Method (CDDS, 1, NotSerialized)
                 {
                     If (LEqual (CADL, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL2, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL3, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL4, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL5, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL6, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL7, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     If (LEqual (CAL8, And (Arg0, 0x0F0F)))
                     {
                         Return (0x1F)
                     }
+
                     Return (0x1D)
                 }
+
                 Method (NDDS, 1, NotSerialized)
                 {
                     If (LEqual (NADL, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL2, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL3, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL4, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL5, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL6, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL7, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     If (LEqual (NDL8, And (Arg0, 0x0F0F)))
                     {
                         Return (One)
                     }
+
                     Return (Zero)
                 }
+
                 Scope (^^PCI0)
                 {
                     OperationRegion (MCHP, PCI_Config, 0x40, 0xC0)
@@ -2620,6 +2846,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Offset (0x62)
                     }
                 }
+
                 OperationRegion (IGDP, PCI_Config, 0x40, 0xC0)
                 Field (IGDP, AnyAcc, NoLock, Preserve)
                 {
@@ -2647,6 +2874,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Offset (0xBC), 
                     ASLS,   32
                 }
+
                 OperationRegion (IGDM, SystemMemory, ASLB, 0x2000)
                 Field (IGDM, AnyAcc, NoLock, Preserve)
                 {
@@ -2732,6 +2960,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     PHED,   32, 
                     BDDC,   2048
                 }
+
                 Name (DBTB, Package (0x15)
                 {
                     Zero, 
@@ -2763,21 +2992,25 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0xE4, 
                         0x0140
                     }, 
+
                     Package (0x02)
                     {
                         0xDE, 
                         0x014D
                     }, 
+
                     Package (0x02)
                     {
                         0xDE, 
                         0x014D
                     }, 
+
                     Package (0x02)
                     {
                         Zero, 
                         Zero
                     }, 
+
                     Package (0x02)
                     {
                         0xDE, 
@@ -2798,12 +3031,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, One))
                         {
                             Store (0x0240, PARM)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x04))
                         {
                             And (PARM, 0xEFFF0000, PARM)
@@ -2813,6 +3048,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x05))
                         {
                             Store (IPSC, PARM)
@@ -2824,6 +3060,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x06))
                         {
                             Store (ITVF, PARM)
@@ -2831,6 +3068,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x07))
                         {
                             Store (GIVD, PARM)
@@ -2843,6 +3081,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (One, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x0A))
                         {
                             Store (Zero, PARM)
@@ -2850,18 +3089,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Or (PARM, 0x03, PARM)
                             }
+
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x0B))
                         {
                             Store (KSV0, PARM)
                             Store (KSV1, GESF)
                             Return (SUCC)
                         }
+
                         Store (Zero, GESF)
                         Return (CRIT)
                     }
+
                     Method (SBCB, 0, Serialized)
                     {
                         If (LEqual (GESF, Zero))
@@ -2870,30 +3113,35 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, One))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x03))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x04))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x05))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x06))
                         {
                             Store (And (PARM, 0x0F), ITVF)
@@ -2902,6 +3150,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x07))
                         {
                             If (LEqual (PARM, Zero))
@@ -2913,16 +3162,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     GLID (CLID)
                                 }
                             }
+
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x08))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x09))
                         {
                             And (PARM, 0xFF, IBTT)
@@ -2930,6 +3182,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x0A))
                         {
                             And (PARM, 0xFF, IPSC)
@@ -2938,11 +3191,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 And (ShiftRight (PARM, 0x08), 0xFF, IPAT)
                                 Decrement (IPAT)
                             }
+
                             And (ShiftRight (PARM, 0x14), 0x07, IBIA)
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x0B))
                         {
                             And (ShiftRight (PARM, One), One, IF1E)
@@ -2954,16 +3209,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 And (ShiftRight (PARM, 0x11), 0x0F, IDMS)
                             }
+
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x10))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x11))
                         {
                             Store (ShiftLeft (LIDS, 0x08), PARM)
@@ -2971,6 +3229,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, GESF)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x12))
                         {
                             If (And (PARM, One))
@@ -2989,16 +3248,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Store (Zero, ISSC)
                             }
+
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x13))
                         {
                             Store (Zero, GESF)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         If (LEqual (GESF, 0x14))
                         {
                             And (PARM, 0x0F, PAVP)
@@ -3006,45 +3268,55 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, PARM)
                             Return (SUCC)
                         }
+
                         Store (Zero, GESF)
                         Return (SUCC)
                     }
+
                     If (LEqual (GEFC, 0x04))
                     {
                         Store (GBDA (), GXFC)
                     }
+
                     If (LEqual (GEFC, 0x06))
                     {
                         Store (SBCB (), GXFC)
                     }
+
                     Store (Zero, GEFC)
                     Store (One, SCIS)
                     Store (Zero, GSSE)
                     Store (Zero, SCIE)
                     Return (Zero)
                 }
+
                 Method (PDRD, 0, NotSerialized)
                 {
                     If (LNot (DRDY))
                     {
                         Sleep (ASLP)
                     }
+
                     Return (LNot (DRDY))
                 }
+
                 Method (PSTS, 0, NotSerialized)
                 {
                     If (LGreater (CSTS, 0x02))
                     {
                         Sleep (ASLP)
                     }
+
                     Return (LEqual (CSTS, 0x03))
                 }
+
                 Method (GNOT, 2, NotSerialized)
                 {
                     If (PDRD ())
                     {
                         Return (One)
                     }
+
                     Store (Arg0, CEVT)
                     Store (0x03, CSTS)
                     If (LAnd (LEqual (CHPD, Zero), LEqual (Arg1, Zero)))
@@ -3058,42 +3330,51 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Notify (OVGA, Arg1)
                         }
                     }
+
                     Notify (OVGA, 0x80)
                     Return (Zero)
                 }
+
                 Method (GHDS, 1, NotSerialized)
                 {
                     Store (Arg0, TIDX)
                     Return (GNOT (One, Zero))
                 }
+
                 Method (GLID, 1, NotSerialized)
                 {
                     Store (Arg0, CLID)
                     Return (GNOT (0x02, Zero))
                 }
+
                 Method (GDCK, 1, NotSerialized)
                 {
                     Store (Arg0, CDCK)
                     Return (GNOT (0x04, Zero))
                 }
+
                 Method (PARD, 0, NotSerialized)
                 {
                     If (LNot (ARDY))
                     {
                         Sleep (ASLP)
                     }
+
                     Return (LNot (ARDY))
                 }
+
                 Method (AINT, 2, NotSerialized)
                 {
                     If (LNot (And (TCHE, ShiftLeft (One, Arg0))))
                     {
                         Return (One)
                     }
+
                     If (PARD ())
                     {
                         Return (One)
                     }
+
                     If (LEqual (Arg0, 0x02))
                     {
                         If (CPFM)
@@ -3118,6 +3399,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     }
                                 }
                             }
+
                             If (LEqual (Local0, 0x06))
                             {
                                 If (And (Local1, 0x08))
@@ -3136,6 +3418,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     }
                                 }
                             }
+
                             If (LEqual (Local0, 0x08))
                             {
                                 If (And (Local1, One))
@@ -3159,6 +3442,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             XOr (PFIT, 0x07, PFIT)
                         }
+
                         Or (PFIT, 0x80000000, PFIT)
                         Store (0x04, ASLC)
                     }
@@ -3183,18 +3467,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     Store (Zero, LBPC)
                     Return (Zero)
                 }
+
                 Method (SCIP, 0, NotSerialized)
                 {
                     If (LNotEqual (OVER, Zero))
                     {
                         Return (LNot (GSMI))
                     }
+
                     Return (Zero)
                 }
             }
+
             Device (PVGA)
             {
                 Name (_ADR, 0x00010000)
@@ -3204,8 +3492,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Return (0x0F)
                     }
+
                     Return (Zero)
                 }
+
                 Name (DSS0, Zero)
                 Name (DCS0, Zero)
                 Name (DGS0, Zero)
@@ -3255,26 +3545,31 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Zero, RETD)
                             }
                         }
+
                         If (LEqual (Arg0, 0x08))
                         {
                             Store (0x80000002, RETS)
                             Store (Zero, RETD)
                         }
+
                         If (LEqual (Arg0, 0x09))
                         {
                             Store (0x80000002, RETS)
                             Store (Zero, RETD)
                         }
+
                         If (LEqual (Arg0, 0x0A))
                         {
                             Store (0x80000002, RETS)
                             Store (Zero, RETD)
                         }
+
                         If (LEqual (Arg0, 0x0D))
                         {
                             Store (0x80000002, RETS)
                             Store (Zero, RETD)
                         }
+
                         If (LEqual (Arg0, 0x0B))
                         {
                             If (LEqual (Arg1, Zero))
@@ -3282,6 +3577,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Zero, RETS)
                                 Store (Zero, RETD)
                             }
+
                             If (LEqual (Arg1, One))
                             {
                                 Store (Zero, RETS)
@@ -3292,11 +3588,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Zero, RSBR)
                                 Store (DLIS, RDBR)
                             }
+
                             If (LEqual (Arg1, 0x02))
                             {
                                 Store (Zero, RETS)
                                 Store (Zero, RETD)
                             }
+
                             If (LEqual (Arg1, 0x03))
                             {
                                 Store (Zero, RETS)
@@ -3313,26 +3611,32 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 {
                                     Or (DCS0, One, DCS0)
                                 }
+
                                 If (And (DCRT, 0x00100000))
                                 {
                                     Or (DCS0, 0x02, DCS0)
                                 }
+
                                 If (And (DHDM, 0x00100000))
                                 {
                                     Or (DCS0, 0x04, DCS0)
                                 }
+
                                 If (And (DLCD, 0x00040000))
                                 {
                                     Or (DSS0, One, DSS0)
                                 }
+
                                 If (And (DCRT, 0x00040000))
                                 {
                                     Or (DSS0, 0x02, DSS0)
                                 }
+
                                 If (And (DHDM, 0x00040000))
                                 {
                                     Or (DSS0, 0x04, DSS0)
                                 }
+
                                 Store ("DCS0 ", Debug)
                                 Store (DCS0, Debug)
                                 Store (DGS0, Debug)
@@ -3350,6 +3654,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                             Store (DerefOf (Index (SEQ1, DGS0)), DGS0)
                                         }
                                     }
+
                                     If (LEqual (DCS0, 0x05))
                                     {
                                         Store (DerefOf (Index (SEQ2, DGS0)), DGS0)
@@ -3358,6 +3663,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                             Store (DerefOf (Index (SEQ2, DGS0)), DGS0)
                                         }
                                     }
+
                                     If (LEqual (DCS0, 0x07))
                                     {
                                         Store (DerefOf (Index (SEQ0, DGS0)), DGS0)
@@ -3368,15 +3674,18 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     }
                                 }
                             }
+
                             If (LEqual (Arg1, 0x05))
                             {
                                 Store (Zero, RETS)
                                 Store (Zero, RETD)
                             }
                         }
+
                         Store (Local1, Debug)
                         Return (Local1)
                     }
+
                     Scope (\_SB)
                     {
                         Device (WMI0)
@@ -3939,6 +4248,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     {
                                         Store (Arg2, Local2)
                                     }
+
                                     CreateDWordField (Arg2, 0x04, SUBF)
                                     Store (Zero, Local2)
                                     If (LGreater (SizeOf (Arg2), 0x08))
@@ -3946,9 +4256,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                         Subtract (SizeOf (Arg2), 0x08, Local2)
                                         ShiftLeft (Local2, 0x03, Local2)
                                     }
+
                                     CreateField (Arg2, 0x40, Local2, ARGS)
                                     Return (^^PCI0.PVGA.EVGA.NVIF (FUNC, SUBF, ARGS))
                                 }
+
                                 Return (Package (0x02)
                                 {
                                     Zero, 
@@ -3957,6 +4269,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     Name (_ADR, Zero)
                     OperationRegion (IGFE, PCI_Config, Zero, 0xA4)
                     Field (IGFE, DWordAcc, NoLock, Preserve)
@@ -3965,24 +4278,29 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Offset (0x95), 
                         IRES,   24
                     }
+
                     Method (GDIS, 0, NotSerialized)
                     {
                         If (LEqual (DCS0, 0x03))
                         {
                             Store (DerefOf (Index (SEQ1, DGS0)), DGS0)
                         }
+
                         If (LEqual (DCS0, 0x05))
                         {
                             Store (DerefOf (Index (SEQ2, DGS0)), DGS0)
                         }
+
                         If (LEqual (DCS0, 0x07))
                         {
                             Store (DerefOf (Index (SEQ0, DGS0)), DGS0)
                         }
                     }
+
                     Method (_DOS, 1, NotSerialized)
                     {
                     }
+
                     Method (_DOD, 0, NotSerialized)
                     {
                         Return (Package (0x03)
@@ -3992,16 +4310,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x0121
                         })
                     }
+
                     Device (LCD)
                     {
                         Method (_ADR, 0, Serialized)
                         {
                             Return (0x0110)
                         }
+
                         Method (_DCS, 0, NotSerialized)
                         {
                             Return (0x1F)
                         }
+
                         Method (_DGS, 0, NotSerialized)
                         {
                             Store (DGS0, Debug)
@@ -4009,11 +4330,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Return (One)
                             }
+
                             Return (Zero)
                         }
+
                         Method (_DSS, 1, NotSerialized)
                         {
                         }
+
                         Method (_BCL, 0, NotSerialized)
                         {
                             Return (Package (0x0D)
@@ -4033,6 +4357,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 0x64
                             })
                         }
+
                         Method (_BCM, 1, NotSerialized)
                         {
                             If (ECON)
@@ -4041,17 +4366,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Local1, ^^^^LPC.EC0.BRTS)
                             }
                         }
+
+                        Name (_HID, EisaId ("LCD1234"))
                     }
+
                     Device (CRT)
                     {
                         Method (_ADR, 0, Serialized)
                         {
                             Return (0x0100)
                         }
+
                         Method (_DCS, 0, NotSerialized)
                         {
                             Return (0x1F)
                         }
+
                         Method (_DGS, 0, NotSerialized)
                         {
                             Store (DGS0, Debug)
@@ -4059,22 +4389,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Return (One)
                             }
+
                             Return (Zero)
                         }
+
                         Method (_DSS, 1, NotSerialized)
                         {
                         }
                     }
+
                     Device (HDMI)
                     {
                         Method (_ADR, 0, Serialized)
                         {
                             Return (0x0121)
                         }
+
                         Method (_DCS, 0, NotSerialized)
                         {
                             Return (0x1F)
                         }
+
                         Method (_DGS, 0, NotSerialized)
                         {
                             Store (DGS0, Debug)
@@ -4082,14 +4417,195 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Return (One)
                             }
+
                             Return (Zero)
                         }
+
                         Method (_DSS, 1, NotSerialized)
                         {
                         }
                     }
+
+                    Method (_DSM, 4, NotSerialized)
+                    {
+                        Store (Package (0x32)
+                            {
+                                "@0,AAPL,boot-display", 
+                                Buffer (Zero) {}, 
+                                "@0,backlight-control", 
+                                Buffer (0x04)
+                                {
+                                    0x01, 0x00, 0x00, 0x00
+                                }, 
+
+                                "@0,pwm-info", 
+                                Buffer (0x14)
+                                {
+                                    /* 0000 */    0x01, 0x14, 0x00, 0x64, 0xA8, 0x61, 0x00, 0x00, 
+                                    /* 0008 */    0x08, 0x52, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 
+                                    /* 0010 */    0x00, 0x04, 0x00, 0x00
+                                }, 
+
+                                "AAPL,backlight-control", 
+                                Buffer (0x04)
+                                {
+                                    0x01, 0x00, 0x00, 0x00
+                                }, 
+
+                                "AAPL,aux-power-connected", 
+                                Buffer (0x04)
+                                {
+                                    0x01, 0x00, 0x00, 0x00
+                                }, 
+
+                                "@0,built-in", 
+                                Buffer (Zero) {}, 
+                                "@0,compatible", 
+                                Buffer (0x0B)
+                                {
+                                    "NVDA,NVMac"
+                                }, 
+
+                                "@0,device_type", 
+                                Buffer (0x08)
+                                {
+                                    "display"
+                                }, 
+
+                                "@0,name", 
+                                Buffer (0x0F)
+                                {
+                                    "NVDA,Display-A"
+                                }, 
+
+                                "@0,use-backlight-blanking", 
+                                Buffer (Zero) {}, 
+                                "@1,can-hot-plug", 
+                                Buffer (Zero) {}, 
+                                "@1,compatible", 
+                                Buffer (0x0B)
+                                {
+                                    "NVDA,NVMac"
+                                }, 
+
+                                "@1,device_type", 
+                                Buffer (0x08)
+                                {
+                                    "display"
+                                }, 
+
+                                "@1,name", 
+                                Buffer (0x0F)
+                                {
+                                    "NVDA,Display-B"
+                                }, 
+
+                                "NVCAP", 
+                                Buffer (0x14)
+                                {
+                                    /* 0000 */    0x05, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 
+                                    /* 0008 */    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x0B, 
+                                    /* 0010 */    0x00, 0x00, 0x00, 0x00
+                                }, 
+
+                                "NVPM", 
+                                Buffer (0x1C)
+                                {
+                                    /* 0000 */    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0008 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0010 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0018 */    0x00, 0x00, 0x00, 0x00
+                                }, 
+
+                                "VRAM,totalsize", 
+                                Buffer (0x04)
+                                {
+                                    0x00, 0x00, 0x00, 0x20
+                                }, 
+
+                                "device_type", 
+                                Buffer (0x0D)
+                                {
+                                    "NVDA,GeForce"
+                                }, 
+
+                                "model", 
+                                Buffer (0x18)
+                                {
+                                    "nVidia GeForce 9600M GT"
+                                }, 
+
+                                "rom-revision", 
+                                Buffer (0x26)
+                                {
+                                    "nVidia GeForce 9600M GT OpenGL Engine"
+                                }, 
+
+                                "AAPL,HasPanel", 
+                                Buffer (0x04)
+                                {
+                                    0x01, 0x00, 0x00, 0x00
+                                }, 
+
+                                "AAPL01,DualLink", 
+                                Buffer (0x04)
+                                {
+                                    0x01, 0x00, 0x00, 0x00
+                                }, 
+
+                                "@0,EDID", 
+                                Buffer (0x80)
+                                {
+                                    /* 0000 */    0x00, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 
+                                    /* 0008 */    0x4C, 0xA3, 0x4D, 0x31, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0010 */    0x00, 0x12, 0x01, 0x03, 0x80, 0x23, 0x14, 0x78, 
+                                    /* 0018 */    0x0A, 0x87, 0xF5, 0x94, 0x57, 0x4F, 0x8C, 0x27, 
+                                    /* 0020 */    0x27, 0x50, 0x54, 0x00, 0x00, 0x00, 0x01, 0x01, 
+                                    /* 0028 */    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 
+                                    /* 0030 */    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x1D, 0x36, 
+                                    /* 0038 */    0x80, 0xA0, 0x70, 0x38, 0x1E, 0x40, 0x30, 0x20, 
+                                    /* 0040 */    0x25, 0x00, 0x61, 0xC6, 0x10, 0x00, 0x00, 0x19, 
+                                    /* 0048 */    0x00, 0x00, 0x00, 0x0F, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0050 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x91, 0x02, 
+                                    /* 0058 */    0x64, 0x00, 0x00, 0x00, 0x00, 0xFE, 0x00, 0x53, 
+                                    /* 0060 */    0x41, 0x4D, 0x53, 0x55, 0x4E, 0x47, 0x0A, 0x20, 
+                                    /* 0068 */    0x20, 0x20, 0x20, 0x20, 0x00, 0x00, 0x00, 0xFE, 
+                                    /* 0070 */    0x00, 0x31, 0x36, 0x30, 0x48, 0x54, 0x30, 0x33, 
+                                    /* 0078 */    0x2D, 0x30, 0x30, 0x31, 0x0A, 0x20, 0x00, 0x60
+                                }, 
+
+                                "AAPL,slot-name", 
+                                Buffer (0x0F)
+                                {
+                                    "PCI Slot@1,0,0"
+                                }, 
+
+                                "reg", 
+                                Buffer (0x78)
+                                {
+                                    /* 0000 */    0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0008 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0010 */    0x00, 0x00, 0x00, 0x00, 0x10, 0x00, 0x01, 0x02, 
+                                    /* 0018 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0020 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 
+                                    /* 0028 */    0x14, 0x00, 0x01, 0x42, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0030 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0038 */    0x00, 0x00, 0x00, 0x10, 0x1C, 0x00, 0x01, 0x02, 
+                                    /* 0040 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0048 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 
+                                    /* 0050 */    0x24, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0058 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0060 */    0x80, 0x00, 0x00, 0x00, 0x30, 0x00, 0x01, 0x02, 
+                                    /* 0068 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+                                    /* 0070 */    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x00
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
                 }
             }
+
             Device (P32)
             {
                 Name (_ADR, 0x001E0000)
@@ -4112,6 +4628,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                     }
                 }
+
                 Method (_PRT, 0, NotSerialized)
                 {
                     If (LEqual (GPIC, Zero))
@@ -4125,6 +4642,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKD, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4132,6 +4650,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4139,6 +4658,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKA, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4159,6 +4679,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x13
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4166,6 +4687,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4173,6 +4695,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x10
                             }, 
+
                             Package (0x04)
                             {
                                 0x0002FFFF, 
@@ -4184,22 +4707,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (LPC)
             {
                 Name (_ADR, 0x001F0000)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x02)
-                        {
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x18, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
                 OperationRegion (PRR0, PCI_Config, 0x60, 0x04)
                 Field (PRR0, AnyAcc, NoLock, Preserve)
                 {
@@ -4208,6 +4719,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     PIRC,   8, 
                     PIRD,   8
                 }
+
                 OperationRegion (PRR1, PCI_Config, 0x68, 0x04)
                 Field (PRR1, AnyAcc, NoLock, Preserve)
                 {
@@ -4216,12 +4728,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     PIRG,   8, 
                     PIRH,   8
                 }
+
                 OperationRegion (PRR2, PCI_Config, 0x80, 0x02)
                 Field (PRR2, AnyAcc, NoLock, Preserve)
                 {
                     IODL,   8, 
                     IODH,   8
                 }
+
                 Device (LNKA)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4237,10 +4751,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRA, 0x80, PIRA)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4257,9 +4773,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRA, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4278,9 +4796,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRA)
                     }
                 }
+
                 Device (LNKB)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4296,10 +4816,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRB, 0x80, PIRB)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4316,9 +4838,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRB, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4337,9 +4861,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRB)
                     }
                 }
+
                 Device (LNKC)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4355,10 +4881,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRC, 0x80, PIRC)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4375,9 +4903,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRC, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4396,9 +4926,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRC)
                     }
                 }
+
                 Device (LNKD)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4414,10 +4946,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRD, 0x80, PIRD)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4434,9 +4968,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRD, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4455,9 +4991,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRD)
                     }
                 }
+
                 Device (LNKE)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4473,10 +5011,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRE, 0x80, PIRE)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4493,9 +5033,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRE, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4514,9 +5056,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRE)
                     }
                 }
+
                 Device (LNKF)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4532,10 +5076,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRF, 0x80, PIRF)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4552,9 +5098,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRF, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4573,9 +5121,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRF)
                     }
                 }
+
                 Device (LNKG)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4591,10 +5141,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRG, 0x80, PIRG)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4611,9 +5163,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRG, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4632,9 +5186,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRG)
                     }
                 }
+
                 Device (LNKH)
                 {
                     Name (_HID, EisaId ("PNP0C0F"))
@@ -4650,10 +5206,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x0B)
                         }
                     }
+
                     Method (_DIS, 0, NotSerialized)
                     {
                         Or (PIRH, 0x80, PIRH)
                     }
+
                     Method (_CRS, 0, NotSerialized)
                     {
                         Name (BUF0, ResourceTemplate ()
@@ -4670,9 +5228,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (One, Local0)
                         }
+
                         ShiftLeft (Local0, And (PIRH, 0x0F), IRQW)
                         Return (BUF0)
                     }
+
                     Name (_PRS, ResourceTemplate ()
                     {
                         IRQ (Level, ActiveLow, Shared, )
@@ -4691,9 +5251,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local0, 0x80, Local0)
                         }
+
                         Store (Local0, PIRH)
                     }
                 }
+
                 Device (SYSR)
                 {
                     Name (_HID, EisaId ("PNP0C02"))
@@ -4853,6 +5415,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             )
                     })
                 }
+
                 Device (DMAC)
                 {
                     Name (_HID, EisaId ("PNP0200"))
@@ -4886,6 +5449,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {4}
                     })
                 }
+
                 Device (RTC)
                 {
                     Name (_HID, EisaId ("PNP0B00"))
@@ -4898,11 +5462,50 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             0x02,               // Length
                             )
                     })
+                    Name (BUF1, ResourceTemplate ()
+                    {
+                        IO (Decode16,
+                            0x0070,             // Range Minimum
+                            0x0070,             // Range Maximum
+                            0x01,               // Alignment
+                            0x08,               // Length
+                            )
+                    })
                     Method (_CRS, 0, Serialized)
                     {
                         Return (BUF0)
                     }
                 }
+
+                Device (HPET)
+                {
+                    Name (_HID, EisaId ("PNP0103"))
+                    Name (BUF0, ResourceTemplate ()
+                    {
+                        IRQNoFlags ()
+                            {0}
+                        IRQNoFlags ()
+                            {8}
+                        IRQNoFlags ()
+                            {11}
+                        IRQNoFlags ()
+                            {15}
+                        Memory32Fixed (ReadOnly,
+                            0xFED00000,         // Address Base
+                            0x00000400,         // Address Length
+                            )
+                    })
+                    Method (_STA, 0, NotSerialized)
+                    {
+                        Return (0x0F)
+                    }
+
+                    Method (_CRS, 0, Serialized)
+                    {
+                        Return (BUF0)
+                    }
+                }
+
                 Device (PIC)
                 {
                     Name (_HID, EisaId ("PNP0000"))
@@ -5012,6 +5615,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             )
                     })
                 }
+
                 Device (FPU)
                 {
                     Name (_HID, EisaId ("PNP0C04"))
@@ -5027,6 +5631,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {13}
                     })
                 }
+
                 Device (TIMR)
                 {
                     Name (_HID, EisaId ("PNP0100"))
@@ -5066,9 +5671,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Return (BUF0)
                         }
+
                         Return (BUF1)
                     }
                 }
+
                 Device (FWHD)
                 {
                     Name (_HID, EisaId ("INT0800"))
@@ -5080,6 +5687,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             )
                     })
                 }
+
                 Device (KBC)
                 {
                     Name (_HID, EisaId ("PNP0303"))
@@ -5105,6 +5713,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x0F)
                     }
                 }
+
                 Device (MOUE)
                 {
                     Method (_HID, 0, NotSerialized)
@@ -5118,6 +5727,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Return (0x1502A906)
                         }
                     }
+
                     Name (_CID, Package (0x03)
                     {
                         EisaId ("SYN0100"), 
@@ -5134,6 +5744,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Return (0x0F)
                     }
                 }
+
                 Device (EC0)
                 {
                     Name (_HID, EisaId ("PNP0C09"))
@@ -5158,6 +5769,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                         Return (BFFR)
                     }
+
                     OperationRegion (ERAM, EmbeddedControl, Zero, 0xFF)
                     Field (ERAM, ByteAcc, Lock, Preserve)
                     {
@@ -5293,6 +5905,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Offset (0xF4), 
                         BMD0,   16
                     }
+
                     OperationRegion (CCLK, SystemIO, 0x0410, 0x04)
                     Field (CCLK, DWordAcc, NoLock, Preserve)
                     {
@@ -5304,6 +5917,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             ,   8, 
                         TSTS,   1
                     }
+
                     OperationRegion (ECRM, EmbeddedControl, Zero, 0xFF)
                     Field (ECRM, ByteAcc, Lock, Preserve)
                     {
@@ -5323,6 +5937,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Offset (0xF9), 
                         RFRD,   16
                     }
+
                     Mutex (FAMX, 0x00)
                     Method (FANG, 1, NotSerialized)
                     {
@@ -5332,6 +5947,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Release (FAMX)
                         Return (Local0)
                     }
+
                     Method (FANW, 2, NotSerialized)
                     {
                         Acquire (FAMX, 0xFFFF)
@@ -5340,10 +5956,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Release (FAMX)
                         Return (Arg1)
                     }
+
                     Method (TUVR, 1, NotSerialized)
                     {
                         Return (0x03)
                     }
+
                     Method (THRO, 1, NotSerialized)
                     {
                         If (LEqual (Arg0, Zero))
@@ -5369,6 +5987,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     Method (CLCK, 1, NotSerialized)
                     {
                         If (LEqual (Arg0, Zero))
@@ -5380,8 +5999,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Arg0, DUTY)
                             Store (One, THEN)
                         }
+
                         Return (THEN)
                     }
+
                     Method (PCLK, 0, NotSerialized)
                     {
                         Store (PTVL, Local0)
@@ -5405,6 +6026,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     Method (_REG, 2, NotSerialized)
                     {
                         If (LAnd (LEqual (Arg0, 0x03), LEqual (Arg1, One)))
@@ -5416,6 +6038,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             HTEV (0x02)
                         }
                     }
+
                     Method (OSTE, 0, NotSerialized)
                     {
                         Store (Zero, VIST)
@@ -5425,33 +6048,39 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (One, VIST)
                             Store (One, RFLG)
                         }
+
                         If (LEqual (OSYS, 0x07D6))
                         {
                             Store (One, VIST)
                             Store (Zero, RFLG)
                         }
+
                         If (LEqual (OSYS, 0x07D1))
                         {
                             Store (Zero, VIST)
                             Store (Zero, RFLG)
                         }
                     }
+
                     Method (DSSW, 0, NotSerialized)
                     {
                         ^^^OVGA.GHDS (One)
                     }
+
                     Method (_Q11, 0, NotSerialized)
                     {
                         Store (0x11, P80H)
                         Notify (^^^OVGA.DD03, 0x87)
                         Notify (^^^PVGA.EVGA.LCD, 0x87)
                     }
+
                     Method (_Q12, 0, NotSerialized)
                     {
                         Store (0x12, P80H)
                         Notify (^^^OVGA.DD03, 0x86)
                         Notify (^^^PVGA.EVGA.LCD, 0x86)
                     }
+
                     Method (_Q13, 0, NotSerialized)
                     {
                         If (ECON)
@@ -5459,6 +6088,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Notify (\_TZ.THRM, 0x80)
                         }
                     }
+
                     Method (_Q1C, 0, NotSerialized)
                     {
                         If (ECON)
@@ -5472,14 +6102,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     Method (_Q1D, 0, NotSerialized)
                     {
                         PCLK ()
                     }
+
                     Method (_Q22, 0, NotSerialized)
                     {
                         Notify (BAT0, 0x80)
                     }
+
                     Method (_Q25, 0, NotSerialized)
                     {
                         If (BAL0)
@@ -5497,22 +6130,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             And (GPL1, 0xFFFFFBFF, GPL1)
                         }
+
                         If (LNotEqual (WWID, Ones))
                         {
                             Store (0x05, ^^^^WMID.WEID)
                             Notify (WMID, 0x80)
                         }
+
                         Notify (BAT0, 0x81)
                         Notify (BAT0, 0x80)
                     }
+
                     Method (_Q2A, 0, NotSerialized)
                     {
                     }
+
                     Method (_Q2C, 0, NotSerialized)
                     {
                         Store (0x03, ^^^^WMID.WEID)
                         Notify (WMID, 0x80)
                     }
+
                     Method (_Q37, 0, NotSerialized)
                     {
                         Notify (AC, 0x80)
@@ -5520,6 +6158,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Notify (\_PR.CPU0, 0x81)
                         Notify (\_PR.CPU1, 0x81)
                     }
+
                     Method (_Q38, 0, NotSerialized)
                     {
                         Notify (AC, 0x80)
@@ -5527,6 +6166,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Notify (\_PR.CPU0, 0x81)
                         Notify (\_PR.CPU1, 0x81)
                     }
+
                     Method (_Q43, 0, NotSerialized)
                     {
                         Store (0x43, P80H)
@@ -5547,6 +6187,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 And (GPL0, 0xFEFFFFFF, GPL0)
                             }
+
                             If (BLTH)
                             {
                                 And (GPL1, 0xFFFFFEFF, GPL1)
@@ -5555,6 +6196,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             {
                                 Or (GPL1, 0x0100, GPL1)
                             }
+
                             If (BAL0)
                             {
                                 If (WWAN)
@@ -5566,11 +6208,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     And (GPL1, 0xFFFFFBFF, GPL1)
                                 }
                             }
+
                             Store (One, BTLS)
                         }
+
                         Store (0x05, ^^^^WMID.WEID)
                         Notify (WMID, 0x80)
                     }
+
                     Method (_Q44, 0, NotSerialized)
                     {
                         Store (0x44, P80H)
@@ -5579,6 +6224,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, ^^^^WMID.WEDA)
                         Notify (WMID, 0x80)
                     }
+
                     Method (_Q45, 0, NotSerialized)
                     {
                         Store (0x45, P80H)
@@ -5587,33 +6233,50 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Notify (WMID, 0x80)
                     }
                 }
-                Device (HPET)
+
+                Method (_DSM, 4, NotSerialized)
                 {
-                    Name (_HID, EisaId ("PNP0103"))
-                    Name (CRS, ResourceTemplate ()
-                    {
-                        IRQNoFlags ()
-                            {0}
-                        IRQNoFlags ()
-                            {8}
-                        Memory32Fixed (ReadOnly,
-                            0xFED00000,         // Address Base
-                            0x00000400,         // Address Length
-                            _Y09)
-                    })
-                    Method (_STA, 0, NotSerialized)
-                    {
-                        Return (0x0F)
-                    }
-                    Method (_CRS, 0, NotSerialized)
-                    {
-                        Return (CRS)
-                    }
+                    Store (Package (0x02)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x16, 0x29, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
                 }
             }
+
             Device (UHC1)
             {
                 Name (_ADR, 0x001D0000)
+                Name (_PRW, Package (0x02)
+                {
+                    0x03, 
+                    Zero
+                })
+                OperationRegion (USBR, PCI_Config, 0xC4, One)
+                Field (USBR, AnyAcc, NoLock, Preserve)
+                {
+                    URES,   8
+                }
+
+                Method (_PSW, 1, NotSerialized)
+                {
+                    If (Arg0)
+                    {
+                        Store (0x03, URES)
+                    }
+                    Else
+                    {
+                        Store (Zero, URES)
+                    }
+                }
+
+                Name (_S3D, 0x03)
+                Name (_S4D, 0x03)
                 Method (_DSM, 4, NotSerialized)
                 {
                     Store (Package (0x02)
@@ -5627,9 +6290,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (UHC2)
+            {
+                Name (_ADR, 0x001D0001)
                 Name (_PRW, Package (0x02)
                 {
-                    0x03, 
+                    0x04, 
                     Zero
                 })
                 OperationRegion (USBR, PCI_Config, 0xC4, One)
@@ -5637,6 +6305,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5648,12 +6317,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
-            }
-            Device (UHC2)
-            {
-                Name (_ADR, 0x001D0001)
                 Method (_DSM, 4, NotSerialized)
                 {
                     Store (Package (0x02)
@@ -5667,9 +6333,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (UHC3)
+            {
+                Name (_ADR, 0x001D0002)
                 Name (_PRW, Package (0x02)
                 {
-                    0x04, 
+                    0x0C, 
                     Zero
                 })
                 OperationRegion (USBR, PCI_Config, 0xC4, One)
@@ -5677,6 +6348,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5688,12 +6360,9 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
-            }
-            Device (UHC3)
-            {
-                Name (_ADR, 0x001D0002)
                 Method (_DSM, 4, NotSerialized)
                 {
                     Store (Package (0x02)
@@ -5707,46 +6376,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
-                Name (_PRW, Package (0x02)
-                {
-                    0x0C, 
-                    Zero
-                })
-                OperationRegion (USBR, PCI_Config, 0xC4, One)
-                Field (USBR, AnyAcc, NoLock, Preserve)
-                {
-                    URES,   8
-                }
-                Method (_PSW, 1, NotSerialized)
-                {
-                    If (Arg0)
-                    {
-                        Store (0x03, URES)
-                    }
-                    Else
-                    {
-                        Store (Zero, URES)
-                    }
-                }
-                Name (_S3D, 0x03)
-                Name (_S4D, 0x03)
             }
+
             Device (UHC6)
             {
                 Name (_ADR, 0x001D0003)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x02)
-                        {
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x37, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
                 Name (_PRW, Package (0x02)
                 {
                     0x20, 
@@ -5757,6 +6391,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5768,41 +6403,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
-            }
-            Device (EHC1)
-            {
-                Name (_ADR, 0x001D0007)
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x0C)
+                    Store (Package (0x02)
                         {
-                            "AAPL,current-available", 
-                            0x05DC, 
-                            "AAPL,current-extra", 
-                            0x044C, 
-                            "AAPL,current-in-sleep", 
-                            0x09C4, 
                             "device-id", 
                             Buffer (0x04)
                             {
-                                0x3A, 0x3A, 0x00, 0x00
-                            }, 
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                0x01
-                            }, 
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
+                                0x36, 0x3A, 0x00, 0x00
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (EHC1)
+            {
+                Name (_ADR, 0x001D0007)
                 Name (_PRW, Package (0x02)
                 {
                     0x0D, 
@@ -5813,6 +6434,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5824,6 +6446,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
                 Device (RHUB)
@@ -5848,23 +6471,56 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                     }
                 }
-            }
-            Device (UHC4)
-            {
-                Name (_ADR, 0x001A0000)
+
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x02)
+                    Store (Package (0x11)
                         {
                             "device-id", 
                             Buffer (0x04)
                             {
-                                0x41, 0x3A, 0x00, 0x00
+                                0x36, 0x28, 0x00, 0x00
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                0x0A
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                0x00
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            "AAPL,device-internal", 
+                            0x10, 
+                            Buffer (One)
+                            {
+                                0x00
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (UHC4)
+            {
+                Name (_ADR, 0x001A0000)
                 Name (_PRW, Package (0x02)
                 {
                     0x0E, 
@@ -5875,6 +6531,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5886,6 +6543,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
                 Device (RHUB)
@@ -5909,6 +6567,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Zero
                         })
                     }
+
                     Device (PRT2)
                     {
                         Name (_ADR, 0x02)
@@ -5928,10 +6587,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                     }
                 }
-            }
-            Device (UHC5)
-            {
-                Name (_ADR, 0x001A0001)
+
                 Method (_DSM, 4, NotSerialized)
                 {
                     Store (Package (0x02)
@@ -5939,12 +6595,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             "device-id", 
                             Buffer (0x04)
                             {
-                                0x42, 0x3A, 0x00, 0x00
+                                0x37, 0x3A, 0x00, 0x00
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (UHC5)
+            {
+                Name (_ADR, 0x001A0001)
                 Name (_PRW, Package (0x02)
                 {
                     0x05, 
@@ -5955,6 +6616,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -5966,41 +6628,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
-            }
-            Device (EHC2)
-            {
-                Name (_ADR, 0x001A0007)
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x0C)
+                    Store (Package (0x02)
                         {
-                            "AAPL,current-available", 
-                            0x05DC, 
-                            "AAPL,current-extra", 
-                            0x044C, 
-                            "AAPL,current-in-sleep", 
-                            0x09C4, 
                             "device-id", 
                             Buffer (0x04)
                             {
-                                0x3A, 0x3A, 0x00, 0x00
-                            }, 
-                            "AAPL,clock-id", 
-                            Buffer (One)
-                            {
-                                0x01
-                            }, 
-                            "device_type", 
-                            Buffer (0x05)
-                            {
-                                "EHCI"
+                                0x38, 0x3A, 0x00, 0x00
                             }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
                 }
+            }
+
+            Device (EHC2)
+            {
+                Name (_ADR, 0x001A0007)
                 Name (_PRW, Package (0x02)
                 {
                     0x0D, 
@@ -6011,6 +6659,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     URES,   8
                 }
+
                 Method (_PSW, 1, NotSerialized)
                 {
                     If (Arg0)
@@ -6022,9 +6671,55 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Zero, URES)
                     }
                 }
+
                 Name (_S3D, 0x03)
                 Name (_S4D, 0x03)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x11)
+                        {
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x3A, 0x28, 0x00, 0x00
+                            }, 
+
+                            "AAPL,clock-id", 
+                            Buffer (One)
+                            {
+                                0x0A
+                            }, 
+
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                0x00
+                            }, 
+
+                            "device_type", 
+                            Buffer (0x05)
+                            {
+                                "EHCI"
+                            }, 
+
+                            "AAPL,current-available", 
+                            0x04B0, 
+                            "AAPL,current-extra", 
+                            0x02BC, 
+                            "AAPL,current-in-sleep", 
+                            0x03E8, 
+                            "AAPL,device-internal", 
+                            0x10, 
+                            Buffer (One)
+                            {
+                                0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
+
             Device (EXP1)
             {
                 Name (_ADR, 0x001C0000)
@@ -6054,6 +6749,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6062,7 +6758,39 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x09, 
                         0x04
                     })
+                    Method (_DSM, 4, NotSerialized)
+                    {
+                        Store (Package (0x08)
+                            {
+                                "AAPL,slot-name", 
+                                Buffer (0x0F)
+                                {
+                                    "PCI Slot@3,0,0"
+                                }, 
+
+                                "built-in", 
+                                Buffer (One)
+                                {
+                                    0x01
+                                }, 
+
+                                "device_type", 
+                                Buffer (0x09)
+                                {
+                                    "Ethernet"
+                                }, 
+
+                                "name", 
+                                Buffer (0x24)
+                                {
+                                    "Realtek RTL8111/8168B PCI-E Gigabit"
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
                 }
+
                 OperationRegion (P1CS, PCI_Config, 0x40, 0x0100)
                 Field (P1CS, AnyAcc, NoLock, Preserve)
                 {
@@ -6084,6 +6812,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPCS,   1, 
                     PMCS,   1
                 }
+
                 Device (PXS1)
                 {
                     Name (_ADR, Zero)
@@ -6101,6 +6830,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         WSSH,   8
                     }
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6119,6 +6849,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKA, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6126,6 +6857,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKB, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6133,6 +6865,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6153,6 +6886,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x10
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6160,6 +6894,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x11
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6167,6 +6902,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6178,6 +6914,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (EXP2)
             {
                 Name (_ADR, 0x001C0001)
@@ -6207,6 +6944,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6216,6 +6954,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x04
                     })
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6234,6 +6973,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKB, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6241,6 +6981,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6248,6 +6989,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKD, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6268,6 +7010,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x11
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6275,6 +7018,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6282,6 +7026,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x13
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6293,6 +7038,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (EXP3)
             {
                 Name (_ADR, 0x001C0002)
@@ -6322,6 +7068,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6331,6 +7078,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x04
                     })
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6349,6 +7097,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6356,6 +7105,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKD, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6363,6 +7113,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKA, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6383,6 +7134,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6390,6 +7142,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x13
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6397,6 +7150,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x10
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6408,6 +7162,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (EXP4)
             {
                 Name (_ADR, 0x001C0003)
@@ -6437,6 +7192,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6446,6 +7202,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x04
                     })
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6464,6 +7221,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKD, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6471,6 +7229,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKA, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6478,6 +7237,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKB, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6498,6 +7258,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x13
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6505,6 +7266,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x10
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6512,6 +7274,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x11
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6522,6 +7285,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                     }
                 }
+
                 Device (LANR)
                 {
                     Name (_ADR, Zero)
@@ -6543,6 +7307,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (EXP5)
             {
                 Name (_ADR, 0x001C0004)
@@ -6572,6 +7337,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6581,6 +7347,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x04
                     })
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6599,6 +7366,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKA, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6606,6 +7374,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKB, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6613,6 +7382,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6633,6 +7403,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x10
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6640,6 +7411,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x11
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6647,6 +7419,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6657,6 +7430,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         })
                     }
                 }
+
                 Device (J380)
                 {
                     Name (_ADR, Zero)
@@ -6675,10 +7449,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Offset (0xD3), 
                         PMC0,   8
                     }
+
                     Method (_RMV, 0, NotSerialized)
                     {
                         Return (Zero)
                     }
+
                     Method (JMBP, 1, NotSerialized)
                     {
                         If (JD3E)
@@ -6694,7 +7470,61 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
+                    Method (_DSM, 4, NotSerialized)
+                    {
+                        Store (Package (0x0C)
+                            {
+                                "fwhub", 
+                                Buffer (0x04)
+                                {
+                                    0x00, 0x00, 0x00, 0x00
+                                }, 
+
+                                "device-id", 
+                                Buffer (0x04)
+                                {
+                                    0x23, 0x80, 0x00, 0x00
+                                }, 
+
+                                "AAPL,slot-name", 
+                                Buffer (0x0F)
+                                {
+                                    "PCI Slot@6,0,0"
+                                }, 
+
+                                "built-in", 
+                                Buffer (One)
+                                {
+                                    0x01
+                                }, 
+
+                                "device_type", 
+                                Buffer (0x13)
+                                {
+                                    "IEEE 1394 Open HCI"
+                                }, 
+
+                                "name", 
+                                Buffer (0x11)
+                                {
+                                    "JMicron FireWire"
+                                }
+                            }, Local0)
+                        DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                        Return (Local0)
+                    }
+
+                    Method (_PRW, 0, NotSerialized)
+                    {
+                        Return (Package (0x02)
+                        {
+                            0x1A, 
+                            0x05
+                        })
+                    }
                 }
+
                 Device (J381)
                 {
                     Name (_ADR, One)
@@ -6717,6 +7547,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (J382)
                 {
                     Name (_ADR, 0x02)
@@ -6739,6 +7570,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (J383)
                 {
                     Name (_ADR, 0x03)
@@ -6761,6 +7593,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Device (J384)
                 {
                     Name (_ADR, 0x04)
@@ -6784,6 +7617,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (EXP6)
             {
                 Name (_ADR, 0x001C0005)
@@ -6813,6 +7647,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     HPSX,   1, 
                     PMSX,   1
                 }
+
                 Device (PXSX)
                 {
                     Name (_ADR, Zero)
@@ -6822,6 +7657,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x04
                     })
                 }
+
                 Name (_PRW, Package (0x02)
                 {
                     0x09, 
@@ -6840,6 +7676,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKB, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6847,6 +7684,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKC, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6854,6 +7692,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 ^^LPC.LNKD, 
                                 Zero
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6874,6 +7713,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x11
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6881,6 +7721,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x12
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6888,6 +7729,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Zero, 
                                 0x13
                             }, 
+
                             Package (0x04)
                             {
                                 0xFFFF, 
@@ -6899,30 +7741,17 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }
                 }
             }
+
             Device (SBUS)
             {
                 Name (_ADR, 0x001F0003)
-                Method (_DSM, 4, NotSerialized)
-                {
-                    Store (Package (0x04)
-                        {
-                            "name", 
-                            "pci8086,3a30", 
-                            "device-id", 
-                            Buffer (0x04)
-                            {
-                                0x30, 0x3A, 0x00, 0x00
-                            }
-                        }, Local0)
-                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
-                    Return (Local0)
-                }
                 OperationRegion (SMBP, PCI_Config, 0x40, 0xC0)
                 Field (SMBP, DWordAcc, NoLock, Preserve)
                 {
                         ,   2, 
                     I2CE,   1
                 }
+
                 OperationRegion (SMBI, SystemIO, 0x8000, 0x10)
                 Field (SMBI, ByteAcc, NoLock, Preserve)
                 {
@@ -6933,6 +7762,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     XMSL,   8, 
                     HSD0,   8
                 }
+
                 Method (SMAB, 3, Serialized)
                 {
                     Acquire (_GL, 0xFFFF)
@@ -6943,6 +7773,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Stall (0x64)
                         Decrement (Local0)
                     }
+
                     If (Local0)
                     {
                         Store (Arg1, HSCD)
@@ -6951,6 +7782,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (Arg2, HSD0)
                         }
+
                         Store (0xFF, HSSS)
                         Store (0x48, HSCT)
                         Store (0xFA, Local0)
@@ -6960,6 +7792,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Stall (0x64)
                             Decrement (Local0)
                         }
+
                         And (HSSS, 0x1C, Local1)
                         Store (0xFF, HSSS)
                         If (LAnd (LEqual (Local1, Zero), And (Arg0, One)))
@@ -6971,15 +7804,49 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (One, Local1)
                     }
+
                     Release (_GL)
                     If (And (Arg0, One))
                     {
                         ShiftLeft (Local1, 0x08, Local3)
                         Or (Local3, Local2, Local1)
                     }
+
                     Return (Local1)
                 }
+
+                Device (BUS0)
+                {
+                    Name (_CID, "smbus")
+                    Name (_ADR, Zero)
+                    Device (DVL0)
+                    {
+                        Name (_ADR, 0x57)
+                        Name (_CID, "diagsvault")
+                    }
+                }
+
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x04)
+                        {
+                            "name", 
+                            Buffer (0x0D)
+                            {
+                                "pci8086,3a30"
+                            }, 
+
+                            "device-id", 
+                            Buffer (0x04)
+                            {
+                                0x30, 0x3A, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
             }
+
             Device (ACEL)
             {
                 Name (_HID, EisaId ("HPQ0004"))
@@ -6989,6 +7856,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     ITAL ()
                 }
+
                 Name (_CRS, ResourceTemplate ()
                 {
                     Interrupt (ResourceConsumer, Edge, ActiveHigh, Exclusive, ,, )
@@ -7010,10 +7878,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Zero, Local0)
                             }
                         }
+
                         Store (Local0, DEPT)
                     }
+
                     Return (DEPT)
                 }
+
                 Method (ITAL, 0, Serialized)
                 {
                     If (_STA ())
@@ -7031,6 +7902,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         AJAL ()
                     }
                 }
+
                 Method (AJAL, 0, Serialized)
                 {
                     If (_STA ())
@@ -7054,6 +7926,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Method (CLRI, 0, Serialized)
                 {
                     Store (Zero, Local2)
@@ -7064,23 +7937,28 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (^^LPC.EC0.BST0, Local0)
                         }
+
                         If (And (Local0, 0x04))
                         {
                             Store (One, Local2)
                         }
                     }
+
                     Return (Local2)
                 }
+
                 Method (ALRD, 1, Serialized)
                 {
                     Store (^^SBUS.SMAB (0x3B, Arg0, Zero), Local0)
                     Return (Local0)
                 }
+
                 Method (ALWR, 2, Serialized)
                 {
                     Store (^^SBUS.SMAB (0x3A, Arg0, Arg1), Local0)
                     Return (Local0)
                 }
+
                 Method (ALED, 1, Serialized)
                 {
                     If (Arg0)
@@ -7092,16 +7970,19 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Or (GPL0, 0x00080000, GPL0)
                     }
                 }
+
                 Method (ALID, 1, Serialized)
                 {
                     Return (^^^LID0._LID ())
                 }
+
                 Method (ADSN, 0, Serialized)
                 {
                     Store (Zero, Local0)
                     Return (Local0)
                 }
             }
+
             Device (MIR)
             {
                 Name (_HID, EisaId ("ENE0100"))
@@ -7109,6 +7990,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Return (0x0B)
                 }
+
                 Method (_CRS, 0, NotSerialized)
                 {
                     Name (BUF0, ResourceTemplate ()
@@ -7124,6 +8006,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     })
                     Return (BUF0)
                 }
+
                 Name (_PRS, ResourceTemplate ()
                 {
                     IO (Decode16,
@@ -7141,19 +8024,60 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     0x05
                 })
             }
+
             Device (HDEF)
             {
                 Name (_ADR, 0x001B0000)
+                Method (_PRW, 0, NotSerialized)
+                {
+                    Return (Package (0x02)
+                    {
+                        0x0D, 
+                        0x05
+                    })
+                }
+
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x04)
+                    Store (Package (0x0E)
                         {
-                            "layout-id",
+                            "built-in", 
+                            Buffer (One)
+                            {
+                                0x01
+                            }, 
+
+                            "subsystem-id", 
                             Buffer (0x04)
                             {
-                                0x0C, 0x00, 0x00, 0x00
-                            },
-                            "PinConfigurations",
+                                0x1B, 0x36, 0x00, 0x00
+                            }, 
+
+                            "subsystem-vendor-id", 
+                            Buffer (0x04)
+                            {
+                                0x3C, 0x10, 0x00, 0x00
+                            }, 
+
+                            "codec-id", 
+                            Buffer (0x04)
+                            {
+                                0xB2, 0x76, 0x1D, 0x11
+                            }, 
+
+                            "layout-id", 
+                            Buffer (0x04)
+                            {
+                                0x78, 0x03, 0x00, 0x00
+                            }, 
+
+                            "device-type", 
+                            Buffer (0x10)
+                            {
+                                "IDT 92HD71B7"
+                            }, 
+
+                            "PinConfigurations", 
                             Buffer (Zero) {}
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
@@ -7161,12 +8085,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 }
             }
         }
+
         OperationRegion (EXCO, SystemIO, 0x72, 0x02)
         Field (EXCO, ByteAcc, NoLock, Preserve)
         {
             INDX,   8, 
             DATA,   8
         }
+
         IndexField (INDX, DATA, ByteAcc, NoLock, Preserve)
         {
                     Offset (0xEC), 
@@ -7180,6 +8106,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 ,   1, 
             PJRV,   1
         }
+
         Name (WMIE, Zero)
         Device (WMID)
         {
@@ -7207,6 +8134,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 SSMP,   8
             }
+
             Method (CSMI, 2, Serialized)
             {
                 Store (Arg0, CMTF)
@@ -7214,6 +8142,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (0xC1, SSMP)
                 Return (CMTO)
             }
+
             Method (HWMC, 2, NotSerialized)
             {
                 CreateDWordField (Arg1, Zero, SGIN)
@@ -7224,22 +8153,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (Zero, Local0)
                 }
+
                 If (LEqual (Arg0, 0x02))
                 {
                     Store (0x04, Local0)
                 }
+
                 If (LEqual (Arg0, 0x03))
                 {
                     Store (0x80, Local0)
                 }
+
                 If (LEqual (Arg0, 0x04))
                 {
                     Store (0x0400, Local0)
                 }
+
                 If (LEqual (Arg0, 0x05))
                 {
                     Store (0x1000, Local0)
                 }
+
                 Store (Buffer (Add (0x08, Local0)) {}, Local1)
                 CreateDWordField (Local1, Zero, SGOT)
                 CreateDWordField (Local1, 0x04, RCOD)
@@ -7248,6 +8182,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (0x1000, Local5)
                 }
+
                 CreateField (Arg1, Zero, Multiply (Add (Local5, 0x10), 0x08), 
                     DAIN)
                 Store (0x4C494146, SGOT)
@@ -7264,17 +8199,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (GBBT (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x04))
                         {
                             Store (GDOC (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x09))
                         {
                             Store ("command type9 read-----------", Debug)
                             Store (GHKS (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x0A))
                         {
                             Store ("command typeA read-----------", Debug)
@@ -7284,42 +8222,50 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 Store (Zero, RCOD)
                             }
                         }
+
                         If (LEqual (CTPE, 0x0C))
                         {
                             Store ("command typeC read-----------", Debug)
                             Store (GBBV (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x03))
                         {
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x0E))
                         {
                             Store ("command typeE read-----------", Debug)
                             Store (GWID (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x0F))
                         {
                             Store ("command typeF read-----------", Debug)
                         }
+
                         If (LEqual (CTPE, 0x05))
                         {
                             Store (GWST (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         CreateByteField (Arg1, 0x10, GTDA)
                         If (LEqual (CTPE, 0x07))
                         {
                             Store (BATT (GTDA), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, One))
                         {
                             Store (WQBC (), Local2)
                             Store (Zero, RCOD)
                         }
+
                         If (LEqual (CTPE, 0x10))
                         {
                             Store (QSID (), Local2)
@@ -7327,6 +8273,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, RCOD)
                         }
                     }
+
                     If (LEqual (COMD, 0x02))
                     {
                         Store ("write command start-----------", Debug)
@@ -7347,18 +8294,21 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     Store (SHKS (DDWD), Local2)
                                     Store (Zero, RCOD)
                                 }
+
                                 If (LEqual (CTPE, 0x0A))
                                 {
                                     Store ("command typeA write-----------", Debug)
                                     Store (SHKF (DDWD), Local2)
                                     Store (Zero, RCOD)
                                 }
+
                                 If (LEqual (CTPE, 0x0B))
                                 {
                                     Store ("command typeB write-----------", Debug)
                                     Store (SMCE (DDWD), Local2)
                                     Store (Zero, RCOD)
                                 }
+
                                 If (LEqual (CTPE, 0x05))
                                 {
                                     Store (SWST (DDWD), Local2)
@@ -7366,11 +8316,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     Store (0x05, WEID)
                                     Notify (WMID, 0x80)
                                 }
+
                                 If (LEqual (CTPE, One))
                                 {
                                     Store (WSBC (DDWD), Local2)
                                     Store (Zero, RCOD)
                                 }
+
                                 If (LEqual (CTPE, 0x10))
                                 {
                                     Store ("Set Service ID", Debug)
@@ -7382,6 +8334,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }
                         }
                     }
+
                     If (LEqual (COMD, 0x00020002))
                     {
                         If (LEqual (CTPE, One))
@@ -7404,6 +8357,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, RCOD)
                             Store (0x1C, P80H)
                         }
+
                         If (LEqual (CTPE, 0x02))
                         {
                             Store ("Activate Computrace", Debug)
@@ -7419,6 +8373,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Store (Zero, RCOD)
                             Store (0x2C, P80H)
                         }
+
                         If (LEqual (CTPE, 0x03))
                         {
                             Store ("Deactivate Computrace", Debug)
@@ -7436,6 +8391,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 If (LEqual (RCOD, Zero))
                 {
                     Store (DerefOf (Index (Local2, Zero)), RCOD)
@@ -7450,6 +8406,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     Index (Local1, Add (Local0, 0x08)))
                                 Increment (Local0)
                             }
+
                             Store (0x53534150, SGOT)
                         }
                         Else
@@ -7458,8 +8415,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Return (Local1)
             }
+
             Name (_HID, "PNP0c14")
             Name (_UID, Zero)
             Name (WEID, Zero)
@@ -7480,6 +8439,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             Method (WMAA, 3, Serialized)
             {
             }
+
             Method (GBBT, 0, NotSerialized)
             {
                 Store ("BezelButtonTable-----", Debug)
@@ -7535,8 +8495,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             }, Local0)
                     }
                 }
+
                 Return (Local0)
             }
+
             Method (GHKS, 0, NotSerialized)
             {
                 Store ("GetHotkeyState-----", Debug)
@@ -7550,8 +8512,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (^^PCI0.LPC.EC0.SHKM, Index (DerefOf (Index (Local0, 0x02)), Zero))
                 }
+
                 Return (Local0)
             }
+
             Method (SHKS, 1, Serialized)
             {
                 Store ("SetHotkeyState-----", Debug)
@@ -7559,12 +8523,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (Arg0, ^^PCI0.LPC.EC0.SHKM)
                 }
+
                 Return (Package (0x02)
                 {
                     Zero, 
                     Zero
                 })
             }
+
             Method (HKFR, 0, NotSerialized)
             {
                 Store ("HotkeyFunctionResponse-----", Debug)
@@ -7583,6 +8549,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (Zero, ^^PCI0.LPC.EC0.REC2)
                     Store (Local2, Index (DerefOf (Index (Local0, 0x02)), One))
                 }
+
                 If (LAnd (LEqual (Local1, 0xB6), LEqual (Local2, One)))
                 {
                     Notify (^^PCI0.OVGA.DD03, 0x87)
@@ -7591,6 +8558,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (^^PCI0.LPC.EC0.BRTS, Index (DerefOf (Index (Local0, 0x02)), 0x02))
                     Store (0x0A, Index (DerefOf (Index (Local0, 0x02)), 0x03))
                 }
+
                 If (LAnd (LEqual (Local1, 0xB7), LEqual (Local2, One)))
                 {
                     Notify (^^PCI0.OVGA.DD03, 0x86)
@@ -7599,6 +8567,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (^^PCI0.LPC.EC0.BRTS, Index (DerefOf (Index (Local0, 0x02)), 0x02))
                     Store (0x0A, Index (DerefOf (Index (Local0, 0x02)), 0x03))
                 }
+
                 If (LAnd (LEqual (Local1, 0xAE), LEqual (Local2, One)))
                 {
                     If (And (GPL0, 0x08000000))
@@ -7611,17 +8580,20 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Sleep (0x01F4)
                             Store (^^PCI0.PVGA.DGS0, Local3)
                         }
+
                         Store (Local3, Local4)
                         And (Local3, 0x03, Local3)
                         If (And (Local4, 0x04))
                         {
                             Or (Local3, 0x10, Local3)
                         }
+
                         Store (Local3, Index (DerefOf (Index (Local0, 0x02)), 0x03))
                         If (LEqual (Local3, Zero))
                         {
                             Store (One, Index (DerefOf (Index (Local0, 0x02)), 0x03))
                         }
+
                         Notify (^^PCI0.PVGA.EVGA, 0xCB)
                         Sleep (0x01F4)
                         Store (Zero, Local3)
@@ -7632,6 +8604,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local3, 0x10, Local3)
                         }
+
                         Store (Local3, Index (DerefOf (Index (Local0, 0x02)), 0x02))
                         Sleep (0x64)
                         Notify (^^PCI0.PVGA.EVGA, 0x80)
@@ -7678,9 +8651,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     }
                                 }
                             }
+
                             Increment (Local3)
                             Store (DerefOf (Index (Local2, Local3)), Local4)
                         }
+
                         Store (Local1, Index (DerefOf (Index (Local0, 0x02)), 0x03))
                         Store (Zero, Local1)
                         Store (Package (0x08) {}, Local2)
@@ -7722,23 +8697,28 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     }
                                 }
                             }
+
                             Increment (Local3)
                             Store (DerefOf (Index (Local2, Local3)), Local4)
                         }
+
                         Store (Local1, Index (DerefOf (Index (Local0, 0x02)), 0x02))
                         ^^PCI0.OVGA.GHDS (One)
                         Sleep (0x01F4)
                     }
                 }
+
                 Store (Local0, Debug)
                 Return (Local0)
             }
+
             Method (GHKF, 0, NotSerialized)
             {
                 Store ("GetHotkeyFunction-----", Debug)
                 Store (HKFR (), Local1)
                 Return (Local1)
             }
+
             Method (GADP, 0, NotSerialized)
             {
                 Store (Package (0x03)
@@ -7755,18 +8735,22 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Store (0x03, Index (DerefOf (Index (Local0, 0x02)), Zero))
                     }
+
                     If (LEqual (Local1, 0x10))
                     {
                         Store (0x02, Index (DerefOf (Index (Local0, 0x02)), Zero))
                     }
+
                     If (LEqual (Local1, 0x11))
                     {
                         Store (One, Index (DerefOf (Index (Local0, 0x02)), Zero))
                     }
                 }
+
                 Store (Local0, Debug)
                 Return (Local0)
             }
+
             Method (SHKF, 1, NotSerialized)
             {
                 Store ("SetHotkeyFunction-----", Debug)
@@ -7779,8 +8763,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (Local0, ^^PCI0.LPC.EC0.REC1)
                     Store (Local1, ^^PCI0.LPC.EC0.REC2)
                 }
+
                 Return (HKFR ())
             }
+
             Method (SMCE, 1, NotSerialized)
             {
                 Store ("MCERemoteControl-----", Debug)
@@ -7792,12 +8778,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (Local0, ^^PCI0.LPC.EC0.MCER)
                 }
+
                 Return (Package (0x02)
                 {
                     Zero, 
                     Zero
                 })
             }
+
             Method (GBBV, 0, NotSerialized)
             {
                 Store ("GetBezelButtonValue-----", Debug)
@@ -7815,6 +8803,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Store (^^PCI0.LPC.EC0.REC2, Local1)
                     Store (Zero, ^^PCI0.LPC.EC0.REC2)
                 }
+
                 Store (Local1, Index (DerefOf (Index (Local0, 0x02)), One))
                 If (BSSP)
                 {
@@ -7824,8 +8813,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (Zero, Index (DerefOf (Index (Local0, 0x02)), 0x02))
                 }
+
                 Return (Local0)
             }
+
             Method (GWID, 0, NotSerialized)
             {
                 Store (Zero, Local0)
@@ -7844,6 +8835,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         0x05))
                     Add (Local0, 0x06, Local0)
                 }
+
                 If (LNotEqual (WWID, Ones))
                 {
                     Store (Buffer (0x06)
@@ -7866,8 +8858,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Concatenate (Local1, Local2, Local3)
                         Store (Local3, Local1)
                     }
+
                     Add (Local0, 0x06, Local0)
                 }
+
                 Store (Buffer (0x0A)
                     {
                         /* 0000 */    0x01, 0x01, 0x80, 0x86, 0x42, 0x29, 0x80, 0x86, 
@@ -7892,8 +8886,10 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Concatenate (Local1, Local2, Local3)
                         Store (Local3, Local1)
                     }
+
                     Add (Local0, 0x0A, Local0)
                 }
+
                 Store (Package (0x03) {}, Local2)
                 Store (Zero, Index (Local2, Zero))
                 Store (Local0, Index (Local2, One))
@@ -7901,6 +8897,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (Local2, Debug)
                 Return (Local2)
             }
+
             Method (GDOC, 0, NotSerialized)
             {
                 Store (Package (0x03)
@@ -7914,9 +8911,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Store (One, Local0)
                 }
+
                 Store (Local0, Index (DerefOf (Index (Local1, 0x02)), Zero))
                 Return (Local1)
             }
+
             Method (QSID, 0, NotSerialized)
             {
                 Store ("Get Service ID", Debug)
@@ -7937,6 +8936,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (Local2, Debug)
                 Return (Local2)
             }
+
             Method (WSID, 1, NotSerialized)
             {
                 Store ("WSID Method", Debug)
@@ -7951,6 +8951,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Zero
                 })
             }
+
             Method (WQBC, 0, NotSerialized)
             {
                 Store ("1", Debug)
@@ -7964,10 +8965,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Or (Local1, 0x10, Local1)
                     }
+
                     If (And (Local0, 0x02))
                     {
                         Or (Local1, 0x02, Local1)
                     }
+
                     Store (Package (0x03)
                         {
                             Zero, 
@@ -8016,9 +9019,11 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 }
                             }
                         }
+
                         Increment (Local3)
                         Store (DerefOf (Index (Local2, Local3)), Local4)
                     }
+
                     Store (Package (0x03)
                         {
                             Zero, 
@@ -8033,6 +9038,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Return (Local1)
                 }
             }
+
             Method (WSBC, 1, NotSerialized)
             {
                 Store ("2", Debug)
@@ -8056,12 +9062,14 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Sleep (0x01F4)
                         Store (^^PCI0.PVGA.DGS0, Local3)
                     }
+
                     And (Local3, 0x03, Local2)
                     If (And (Local3, 0x04))
                     {
                         Or (Local2, 0x10, Local2)
                     }
                 }
+
                 Store (Arg0, Local0)
                 And (Local0, 0x13, Local0)
                 If (LEqual (Local0, Local2))
@@ -8082,26 +9090,32 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Store (0x08, NSTE)
                         }
+
                         If (LEqual (Local0, 0x02))
                         {
                             Store (One, NSTE)
                         }
+
                         If (LEqual (Local0, 0x03))
                         {
                             Store (0x09, NSTE)
                         }
+
                         If (LEqual (Local0, 0x04))
                         {
                             Store (0x02, NSTE)
                         }
+
                         If (LEqual (Local0, 0x05))
                         {
                             Store (0x0A, NSTE)
                         }
+
                         If (LEqual (Local0, 0x06))
                         {
                             Store (0x03, NSTE)
                         }
+
                         Notify (^^PCI0.OVGA, 0x80)
                     }
                     Else
@@ -8111,10 +9125,12 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         {
                             Or (Local1, 0x04, Local1)
                         }
+
                         Store (Local1, ^^PCI0.PVGA.DGS0)
                         Notify (^^PCI0.PVGA.EVGA, 0x80)
                         Sleep (0x64)
                     }
+
                     Return (Package (0x02)
                     {
                         Zero, 
@@ -8122,6 +9138,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     })
                 }
             }
+
             Method (BATT, 1, NotSerialized)
             {
                 If (LNotEqual (Arg0, Zero))
@@ -8168,6 +9185,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Add (Local5, 0x30, Index (SERN, Local6))
                             Decrement (Local6)
                         }
+
                         CreateField (DerefOf (Index (Local0, 0x02)), 0xE0, Multiply (SizeOf (SERN), 
                             0x08), BSNO)
                         Store (SERN, BSNO)
@@ -8185,6 +9203,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Add (Local5, 0x30, Index (BMDN, Local6))
                             Decrement (Local6)
                         }
+
                         Store (And (Local7, 0x1F), Local4)
                         Store (0x04, Local6)
                         While (Local4)
@@ -8193,6 +9212,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Add (Local5, 0x30, Index (BMDN, Local6))
                             Decrement (Local6)
                         }
+
                         Store (ShiftRight (Local7, 0x09), Local4)
                         Add (Local4, 0x07BC, Local4)
                         Store (0x09, Local6)
@@ -8202,6 +9222,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                             Add (Local5, 0x30, Index (BMDN, Local6))
                             Decrement (Local6)
                         }
+
                         CreateField (DerefOf (Index (Local0, 0x02)), 0x0110, Multiply (SizeOf (BMDN), 
                             0x08), BMNO)
                         Store (BMDN, BMNO)
@@ -8239,13 +9260,16 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         Store (Local1, BMA0)
                     }
                 }
+
                 Return (Local0)
             }
+
             Method (WMAD, 3, Serialized)
             {
                 Store (HWMC (Arg1, Arg2), Local0)
                 Return (Local0)
             }
+
             Method (GWST, 0, NotSerialized)
             {
                 Store ("Get WMIWLAN status===", Debug)
@@ -8267,6 +9291,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Or (0x04, GWL1, GWL1)
                     Or (ShiftLeft (BTLS, 0x03), GWL1, GWL1)
                 }
+
                 If (LNotEqual (BTID, Ones))
                 {
                     Or (GWL0, 0x02, GWL0)
@@ -8276,6 +9301,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     Or (0x04, GWL2, GWL2)
                     Or (ShiftLeft (BTLS, 0x03), GWL2, GWL2)
                 }
+
                 If (LNotEqual (WWID, Ones))
                 {
                     Or (GWL0, ShiftLeft (WWAT, 0x06), GWL0)
@@ -8289,11 +9315,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     {
                         Or (0x10, GWL3, GWL3)
                     }
+
                     If (LNotEqual (UNDP, 0xFF))
                     {
                         Or (And (ShiftLeft (UNDP, 0x05), 0xE0), GWL3, GWL3)
                     }
                 }
+
                 Store (Package (0x03)
                     {
                         Zero, 
@@ -8310,6 +9338,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (Local0, Debug)
                 Return (Local0)
             }
+
             Method (SWST, 1, NotSerialized)
             {
                 Store ("Set WMIWLAN status===", Debug)
@@ -8335,6 +9364,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                     Store (One, WWAN)
                                     Or (GPL1, 0x0400, GPL1)
                                 }
+
                                 Or (GPL0, 0x01000000, GPL0)
                                 And (GPL1, 0xFFFFFEFF, GPL1)
                             }
@@ -8373,6 +9403,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 }
                             }
                         }
+
                         If (And (Local1, 0x02))
                         {
                             If (And (Local0, 0x02))
@@ -8392,6 +9423,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                                 }
                             }
                         }
+
                         If (And (Local1, 0x04))
                         {
                             If (And (Local0, 0x04))
@@ -8413,6 +9445,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                         }
                     }
                 }
+
                 Store (Package (0x02)
                     {
                         Zero, 
@@ -8420,11 +9453,13 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                     }, Local2)
                 Return (Local2)
             }
+
             Method (_WED, 1, NotSerialized)
             {
                 Concatenate (WEID, WEDA, Local0)
                 Return (Local0)
             }
+
             Name (WQAE, Buffer (0x08A9)
             {
                 /* 0000 */    0x46, 0x4F, 0x4D, 0x42, 0x01, 0x00, 0x00, 0x00, 
@@ -8988,6 +10023,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 /* 08A8 */    0x01
             })
         }
+
         Method (HSWK, 1, NotSerialized)
         {
             If (LGreaterEqual (Arg0, 0x03))
@@ -8995,6 +10031,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 HTEV (0x02)
             }
         }
+
         Method (HTEV, 1, NotSerialized)
         {
             Store (^PCI0.LPC.EC0.GHID, Local0)
@@ -9003,42 +10040,50 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFA, Arg0)
             }
+
             If (LEqual (Local0, 0x02))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFB, Arg0)
             }
+
             If (LEqual (Local0, 0x03))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFC, Arg0)
             }
+
             If (LEqual (Local0, 0x04))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFD, Arg0)
             }
+
             If (LEqual (Local0, 0x05))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFE, Arg0)
             }
+
             If (LEqual (Local0, 0x06))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFF, Arg0)
             }
+
             If (LEqual (Local0, 0x07))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFG, Arg0)
             }
+
             If (LEqual (Local0, 0x08))
             {
                 Store (Zero, ^PCI0.LPC.EC0.GHID)
                 Notify (HKFH, Arg0)
             }
         }
+
         Device (HKFA)
         {
             Name (_HID, "PNP0C32")
@@ -9047,6 +10092,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9055,6 +10101,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFB)
         {
             Name (_HID, "PNP0C32")
@@ -9063,6 +10110,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9071,6 +10119,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFC)
         {
             Name (_HID, "PNP0C32")
@@ -9079,6 +10128,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9087,6 +10137,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFD)
         {
             Name (_HID, "PNP0C32")
@@ -9095,6 +10146,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9103,6 +10155,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFE)
         {
             Name (_HID, "PNP0C32")
@@ -9111,6 +10164,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9119,6 +10173,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFF)
         {
             Name (_HID, "PNP0C32")
@@ -9127,6 +10182,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9135,6 +10191,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFG)
         {
             Name (_HID, "PNP0C32")
@@ -9143,6 +10200,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9151,6 +10209,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Device (HKFH)
         {
             Name (_HID, "PNP0C32")
@@ -9159,6 +10218,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
             {
                 Return (0x0F)
             }
+
             Method (GHID, 0, NotSerialized)
             {
                 Return (Buffer (One)
@@ -9167,6 +10227,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 })
             }
         }
+
         Method (CHWL, 0, NotSerialized)
         {
             If (BTLS)
@@ -9179,6 +10240,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     And (GPL0, 0xFEFFFFFF, GPL0)
                 }
+
                 If (BLTH)
                 {
                     And (GPL1, 0xFFFFFEFF, GPL1)
@@ -9187,6 +10249,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 {
                     Or (GPL1, 0x0100, GPL1)
                 }
+
                 If (^PCI0.LPC.EC0.BAL0)
                 {
                     If (WWAN)
@@ -9210,5 +10273,47 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "HP    ", "VADER   ", 0x00000001)
                 And (GPL1, 0xFFFFFBFF, GPL1)
             }
         }
+
+        Device (PNLF)
+        {
+            Name (_HID, EisaId ("APP0002"))
+            Name (_CID, "backlight")
+            Name (_UID, 0x0A)
+            Name (_STA, 0x0B)
+        }
+    }
+
+    Method (DTGP, 5, NotSerialized)
+    {
+        If (LEqual (Arg0, Buffer (0x10)
+                {
+                    /* 0000 */    0xC6, 0xB7, 0xB5, 0xA0, 0x18, 0x13, 0x1C, 0x44, 
+                    /* 0008 */    0xB0, 0xC9, 0xFE, 0x69, 0x5E, 0xAF, 0x94, 0x9B
+                }))
+        {
+            If (LEqual (Arg1, One))
+            {
+                If (LEqual (Arg2, Zero))
+                {
+                    Store (Buffer (One)
+                        {
+                            0x03
+                        }, Arg4)
+                    Return (One)
+                }
+
+                If (LEqual (Arg2, One))
+                {
+                    Return (One)
+                }
+            }
+        }
+
+        Store (Buffer (One)
+            {
+                0x00
+            }, Arg4)
+        Return (Zero)
     }
 }
+

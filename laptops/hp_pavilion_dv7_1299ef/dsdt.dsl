@@ -1041,6 +1041,8 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
         }
         Method (_L0D, 0, NotSerialized)
         {
+            Notify (\_SB.PCI0.HDEF, 0x02)
+            Notify (\_SB.PCI0.EHC2, 0x02)
         }
         Method (_L0E, 0, NotSerialized)
         {
@@ -7455,49 +7457,16 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
             Device (HDEF)
             {
                 Name (_ADR, 0x001B0000)
-                Method (_PRW, 0, NotSerialized)
-                {
-                    Return (Package (0x02)
-                    {
-                        0x0D, 
-                        0x05
-                    })
-                }
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x0E)
+                    Store (Package (0x04)
                         {
-                            "built-in", 
-                            Buffer (One)
-                            {
-                                0x01
-                            }, 
-                            "subsystem-id", 
+                            "layout-id",
                             Buffer (0x04)
                             {
-                                0x1B, 0x36, 0x00, 0x00
-                            }, 
-                            "subsystem-vendor-id", 
-                            Buffer (0x04)
-                            {
-                                0x3C, 0x10, 0x00, 0x00
-                            }, 
-                            "codec-id", 
-                            Buffer (0x04)
-                            {
-                                0xB2, 0x76, 0x1D, 0x11
-                            }, 
-                            "layout-id", 
-                            Buffer (0x04)
-                            {
-                                0x78, 0x03, 0x00, 0x00
-                            }, 
-                            "device-type", 
-                            Buffer (0x10)
-                            {
-                                "IDT 92HD71B7X"
-                            }, 
-                            "PinConfigurations", 
+                                0x0C, 0x00, 0x00, 0x00
+                            },
+                            "PinConfigurations",
                             Buffer (Zero) {}
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))

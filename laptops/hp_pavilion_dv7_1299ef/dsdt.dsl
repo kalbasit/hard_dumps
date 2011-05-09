@@ -7504,6 +7504,23 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                     Return (Local0)
                 }
             }
+            Device (SATA)
+            {
+                Name (_ADR, 0x001F0002)
+                Method (_DSM, 4, NotSerialized)
+                {
+                    Store (Package (0x02)
+                        {
+                            "device-id",
+                            Buffer (0x04)
+                            {
+                                0x29, 0x28, 0x00, 0x00
+                            }
+                        }, Local0)
+                    DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
+                    Return (Local0)
+                }
+            }
         }
         OperationRegion (EXCO, SystemIO, 0x72, 0x02)
         Field (EXCO, ByteAcc, NoLock, Preserve)

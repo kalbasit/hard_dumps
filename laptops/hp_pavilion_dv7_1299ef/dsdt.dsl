@@ -7495,7 +7495,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                             "device-type", 
                             Buffer (0x10)
                             {
-                                "IDT 92HD71B7"
+                                "IDT 92HD71B7X"
                             }, 
                             "PinConfigurations", 
                             Buffer (Zero) {}

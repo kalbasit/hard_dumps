@@ -4095,11 +4095,6 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                                 {
                                     "NVDA,NVMac"
                                 }, 
-                                "@0,connector-type", 
-                                Buffer (0x0B)
-                                {
-                                    0x02, 0x00, 0x00, 0x00
-                                }, 
                                 "@0,device_type", 
                                 Buffer (0x08)
                                 {
@@ -4129,16 +4124,16 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                                 {
                                     "NVDA,NVMac"
                                 }, 
-                                "@1,connector-type", 
-                                Buffer (0x0B)
-                                {
-                                    0x00, 0x08, 0x00, 0x00
-                                }, 
                                 "@1,device_type", 
                                 Buffer (0x08)
                                 {
                                     "display"
-                                }, 
+                                },
+                                "@1,connector-type",
+                                Buffer (0x0B)
+                                {
+                                    0x00, 0x08, 0x00, 0x00
+                                },
                                 "@1,display-cfg", 
                                 Buffer (0x04)
                                 {

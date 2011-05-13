@@ -7454,15 +7454,27 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                 Name (_ADR, 0x001B0000)
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x04)
+                    Store (Package (0x08)
                         {
                             "layout-id",
                             Buffer (0x04)
                             {
                                 0x0C, 0x00, 0x00, 0x00
                             },
+
+                            "MaximumBootBeepVolume",
+                            Buffer (One)
+                            {
+                                0x6B
+                            },
+
                             "PinConfigurations",
-                            Buffer (Zero) {}
+                            Buffer (Zero) {},
+                            "platformFamily",
+                            Buffer (One)
+                            {
+                                0x00
+                            }
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)

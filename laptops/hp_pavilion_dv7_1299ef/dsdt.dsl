@@ -5111,7 +5111,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                             0x0070,             // Range Minimum
                             0x0070,             // Range Maximum
                             0x01,               // Alignment
-                            0x02,               // Length
+                            0x08,               // Length
                             )
                     })
                     Name (BUF1, ResourceTemplate ()

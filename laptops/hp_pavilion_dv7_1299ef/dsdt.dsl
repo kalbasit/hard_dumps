@@ -4096,7 +4096,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                                     "NVDA,NVMac"
                                 }, 
                                 "@0,connector-type", 
-                                Buffer (0x0B)
+                                Buffer (0x04)
                                 {
                                     0x02, 0x00, 0x00, 0x00
                                 }, 
@@ -4130,7 +4130,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                                     "NVDA,NVMac"
                                 }, 
                                 "@1,connector-type", 
-                                Buffer (0x0B)
+                                Buffer (0x04)
                                 {
                                     0x00, 0x08, 0x00, 0x00
                                 }, 

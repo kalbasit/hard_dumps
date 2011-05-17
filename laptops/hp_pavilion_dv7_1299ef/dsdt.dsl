@@ -7459,7 +7459,7 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                 Name (_ADR, 0x001B0000)
                 Method (_DSM, 4, NotSerialized)
                 {
-                    Store (Package (0x08)
+                    Store (Package (0x0A)
                         {
                             "layout-id",
                             Buffer (0x04)
@@ -7473,13 +7473,21 @@ DefinitionBlock ("dsdt.aml", "DSDT", 1, "APPLE ", "eMxyzptlk", 0x00000001)
                                 0x6B
                             },
 
+                            "CodecAddressMask",
+                            Buffer (One)
+                            {
+                                0x01
+                            },
+
                             "PinConfigurations",
                             Buffer (Zero) {},
+
                             "platformFamily",
                             Buffer (One)
                             {
                                 0x00
                             }
+
                         }, Local0)
                     DTGP (Arg0, Arg1, Arg2, Arg3, RefOf (Local0))
                     Return (Local0)
